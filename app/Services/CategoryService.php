@@ -26,4 +26,10 @@ class CategoryService implements CategoryServiceInterface
         // TODO: Implement getAllCategories() method.
         return $this->categoryRepository->getCategoriesWithPaginate($perPage);
     }
+
+    public function getCategoriesForCombobox()
+    {
+        // TODO: Implement getCategoriesForCombobox() method.
+        return $this->categoryRepository->getCategoriesForCombobox();
+    }
 }

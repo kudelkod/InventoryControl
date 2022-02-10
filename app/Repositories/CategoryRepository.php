@@ -36,4 +36,17 @@ class CategoryRepository extends BaseRepository
         return $this->model->select($columns)
                            ->paginate($perPage);
     }
+
+    public function getCategoriesForCombobox()
+    {
+        $columns = implode(',',['id',
+            'CONCAT (id,". ", name) AS id_name'
+        ]);
+
+        $result = $this->model->selectRaw($columns)
+                              ->toBase()
+                              ->get();
+
+        return $result;
+    }
 }

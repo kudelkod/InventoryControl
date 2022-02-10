@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\CategoryTestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,5 +24,10 @@ Auth::routes();
 Route::prefix('admin')->group(function (){
     Route::prefix('categories')->group(function (){
         Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
+        Route::get('create/', [CategoryController::class, 'create'])->name('categories.create');
+        Route::post('create/', [CategoryController::class, 'store'])->name('categories.store');
+
+
+        Route::resource('categories_test',CategoryTestController::class);
     });
 });
