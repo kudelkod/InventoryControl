@@ -26,15 +26,12 @@ class CategoryRepository extends BaseRepository
     }
 
     /**
-     * @param $perPage
      * @return mixed
      */
-    public function getCategoriesWithPaginate($perPage): mixed
+    public function getAllCategories(): mixed
     {
-        $columns = ['id', 'parent_category_id', 'name'];
-
-        return $this->model->select($columns)
-                           ->paginate($perPage);
+        $columns = ['id', 'parent_category_id', 'name', 'slug'];
+        return $this->model->select($columns);
     }
 
     public function getCategoriesForCombobox()
@@ -43,10 +40,21 @@ class CategoryRepository extends BaseRepository
             'CONCAT (id,". ", name) AS id_name'
         ]);
 
-        $result = $this->model->selectRaw($columns)
-                              ->toBase()
-                              ->get();
-
-        return $result;
+        return $this->model->selectRaw($columns)
+                           ->toBase()
+                           ->get();
     }
+
+    public function getCategoryBySlug($slug){
+
+        $columns = ['id', 'parent_category_id', 'name', 'slug'];
+
+        return $this->model->select($columns)->where('slug', $slug)->first();
+    }
+
+//    public function deleteCategory($id){
+//        $columns = ['id', 'parent_category_id', 'name', 'slug'];
+//
+//        return $this->model->destroy($id);
+//    }
 }

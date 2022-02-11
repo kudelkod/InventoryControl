@@ -3,211 +3,147 @@
 @section('content')
     <form method="post" action="{{route('categories.store')}}">
         @csrf
-        <div class="container">
-            <div class="row g-3">
-
-                <div class="col-md-7 col-lg-8">
-                    <h4 class="mb-3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Адрес для выставления счета</font></font></h4>
-                    <form class="needs-validation" novalidate="">
+        <div class="container mt-2 mb-2 pt-3 pb-3">
+            <div class="justify-content-center">
+                <div class="card mt-2 mb-2 pt-3 pb-3">
+                    <div class="card-body">
                         <div class="row g-3">
-                            <div class="col-sm-6">
-                                <label for="firstName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Имя</font></font></label>
-                                <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-                                <div class="invalid-feedback">
-                                    يرجى إدخال اسم أول صحيح.
+                            <div class="row justify-content-center">
+                                <div class="col-md-10">
+                                    <h3 class="mb-3">Добавить категорию</h3>
+                                        <div class="row g-3">
+                                            <div class="row mt-2 pt-3">
+                                                <div class="col-sm-6">
+                                                    <label for="name" class="form-label">Название</label>
+                                                    <input type="text" name="name" class="form-control name" id="name" placeholder="Название категории" required>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <label for="parent_category_id" class="form-label">Родительская категория</label>
+                                                    <select id="parent_category_id" name="parent_category_id" class="form-control" placeholder="Выберите категорию" required>
+                                                        @foreach($categoryList as $category)
+                                                            <option value="{{$category->id}}">
+                                                                {{$category->id_name}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="row mt-2 pt-3">
+                                                <div class="col-4">
+                                                    <label for="slug" class="form-label">Идентификатор<span class="text-muted">(необязательно)</span></label>
+                                                    <div class="input-group has-validation">
+                                                        <input type="text" name="slug" class="form-control slug" id="slug" placeholder="Идентификатор категории">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-8">
+                                                    <label for="description" class="form-label">Описание<span class="text-muted">(необязательно)</span></label>
+                                                    <textarea type="textarea" name="description" class="form-control" id="description" placeholder="Описание категории" rows="5"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2 pt-2">
+                                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                    <button class="btn btn-primary" type="submit">Сохранить</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
+            {{--                <div class="col-md-5 col-lg-4 order-md-last">--}}
+            {{--                    <h4 class="d-flex justify-content-between align-items-center mb-3">--}}
+            {{--                        <span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Корзина</font></font></span>--}}
+            {{--                        <span class="badge bg-secondary rounded-pill"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></span>--}}
+            {{--                    </h4>--}}
+            {{--                    <ul class="list-group mb-3">--}}
+            {{--                        <li class="list-group-item d-flex justify-content-between lh-sm">--}}
+            {{--                            <div>--}}
+            {{--                                <h6 class="my-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">наименование товара</font></font></h6>--}}
+            {{--                                <small class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Краткое описание</font></font></small>--}}
+            {{--                            </div>--}}
+            {{--                            <span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">12 долларов</font></font></span>--}}
+            {{--                        </li>--}}
+            {{--                        <li class="list-group-item d-flex justify-content-between lh-sm">--}}
+            {{--                            <div>--}}
+            {{--                                <h6 class="my-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">второй продукт</font></font></h6>--}}
+            {{--                                <small class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Краткое описание</font></font></small>--}}
+            {{--                            </div>--}}
+            {{--                            <span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">$8</font></font></span>--}}
+            {{--                        </li>--}}
+            {{--                        <li class="list-group-item d-flex justify-content-between lh-sm">--}}
+            {{--                            <div>--}}
+            {{--                                <h6 class="my-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">третий пункт</font></font></h6>--}}
+            {{--                                <small class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Краткое описание</font></font></small>--}}
+            {{--                            </div>--}}
+            {{--                            <span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">$5</font></font></span>--}}
+            {{--                        </li>--}}
+            {{--                        <li class="list-group-item d-flex justify-content-between bg-light">--}}
+            {{--                            <div class="text-success">--}}
+            {{--                                <h6 class="my-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">промо код</font></font></h6>--}}
+            {{--                                <small><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ПРИМЕР КОДА</font></font></small>--}}
+            {{--                            </div>--}}
+            {{--                            <span class="text-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-$5</font></font></span>--}}
+            {{--                        </li>--}}
+            {{--                        <li class="list-group-item d-flex justify-content-between">--}}
+            {{--                            <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Всего (долл. США)</font></font></span>--}}
+            {{--                            <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">20 долларов</font></font></strong>--}}
+            {{--                        </li>--}}
+            {{--                    </ul>--}}
 
-                            <div class="col-sm-6">
-                                <label for="lastName" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">фамилия</font></font></label>
-                                <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-                                <div class="invalid-feedback">
-                                    يرجى إدخال اسم عائلة صحيح.
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="username" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">имя пользователя</font></font></label>
-                                <div class="input-group has-validation">
-                                    <span class="input-group-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@</font></font></span>
-                                    <input type="text" class="form-control" id="username" placeholder="имя пользователя" required="">
-                                    <div class="invalid-feedback">
-                                        اسم المستخدم الخاص بك مطلوب.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="email" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Электронная почта </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(необязательно)</font></font></span></label>
-                                <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                                <div class="invalid-feedback">
-                                    يرجى إدخال عنوان بريد إلكتروني صحيح لتصلكم تحديثات الشحن.
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="address" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">адрес</font></font></label>
-                                <input type="text" class="form-control" id="address" placeholder="1234 1-я улица" required="">
-                                <div class="invalid-feedback">
-                                    يرجى إدخال عنوان الشحن الخاص بك.
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <label for="address2" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">адрес 2 </font></font><span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(необязательно)</font></font></span></label>
-                                <input type="text" class="form-control" id="address2" placeholder="Квартира 24">
-                            </div>
-
-                            <div class="col-md-5">
-                                <label for="country" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Страна</font></font></label>
-                                <select class="form-select" id="country" required="">
-                                    <option value=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Выбирать...</font></font></option>
-                                    <option><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Соединенные Штаты Америки</font></font></option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    يرجى اختيار بلد صحيح.
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="state" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Область</font></font></label>
-                                <select class="form-select" id="state" required="">
-                                    <option value=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Выбирать...</font></font></option>
-                                    <option><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Калифорния</font></font></option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    يرجى اختيار اسم منطقة صحيح.
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label for="zip" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Почтовый Код</font></font></label>
-                                <input type="text" class="form-control" id="zip" placeholder="" required="">
-                                <div class="invalid-feedback">
-                                    الرمز البريدي مطلوب.
-                                </div>
-                            </div>
+            {{--                    <form class="card p-2">--}}
+            {{--                        <div class="input-group">--}}
+            {{--                            <input type="text" class="form-control" placeholder="промо код">--}}
+            {{--                            <button type="submit" class="btn btn-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Проверять</font></font></button>--}}
+            {{--                        </div>--}}
+            {{--                    </form>--}}
+            {{--                </div>--}}
                         </div>
-
-                        <hr class="my-4">
-
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="same-address">
-                            <label class="form-check-label" for="same-address"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Адрес доставки совпадает с моим платежным адресом</font></font></label>
-                        </div>
-
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="save-info">
-                            <label class="form-check-label" for="save-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Сохраните эту информацию для следующего раза</font></font></label>
-                        </div>
-
-                        <hr class="my-4">
-
-                        <h4 class="mb-3"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Способ оплаты</font></font></h4>
-
-                        <div class="my-3">
-                            <div class="form-check">
-                                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked="" required="">
-                                <label class="form-check-label" for="credit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Кредитная карта</font></font></label>
-                            </div>
-                            <div class="form-check">
-                                <input id="cash" name="paymentMethod" type="radio" class="form-check-input" required="">
-                                <label class="form-check-label" for="cash"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Денежные средства</font></font></label>
-                            </div>
-                            <div class="form-check">
-                                <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required="">
-                                <label class="form-check-label" for="paypal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PayPal</font></font></label>
-                            </div>
-                        </div>
-
-                        <div class="row gy-3">
-                            <div class="col-md-6">
-                                <label for="cc-name" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Имя на карточке</font></font></label>
-                                <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-                                <small class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Полное имя, как указано на карте</font></font></small>
-                                <div class="invalid-feedback">
-                                    الاسم على البطاقة مطلوب
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="cc-number" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">номер карты</font></font></label>
-                                <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-                                <div class="invalid-feedback">
-                                    رقم بطاقة الائتمان مطلوب
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label for="cc-expiration" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Дата окончания срока</font></font></label>
-                                <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
-                                <div class="invalid-feedback">
-                                    تاريخ انتهاء الصلاحية مطلوب
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label for="cc-cvv" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Тройной код (CVV)</font></font></label>
-                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-                                <div class="invalid-feedback">
-                                    رمز الحماية مطلوب
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr class="my-4">
-
-                        <button class="w-100 btn btn-primary btn-lg" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">продолжай платить</font></font></button>
-                    </form>
-                </div>
-                <div class="col-md-5 col-lg-4 order-md-last">
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Корзина</font></font></span>
-                        <span class="badge bg-secondary rounded-pill"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></span>
-                    </h4>
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">наименование товара</font></font></h6>
-                                <small class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Краткое описание</font></font></small>
-                            </div>
-                            <span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">12 долларов</font></font></span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">второй продукт</font></font></h6>
-                                <small class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Краткое описание</font></font></small>
-                            </div>
-                            <span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">$8</font></font></span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                                <h6 class="my-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">третий пункт</font></font></h6>
-                                <small class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Краткое описание</font></font></small>
-                            </div>
-                            <span class="text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">$5</font></font></span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between bg-light">
-                            <div class="text-success">
-                                <h6 class="my-0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">промо код</font></font></h6>
-                                <small><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ПРИМЕР КОДА</font></font></small>
-                            </div>
-                            <span class="text-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-$5</font></font></span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Всего (долл. США)</font></font></span>
-                            <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">20 долларов</font></font></strong>
-                        </li>
-                    </ul>
-
-                    <form class="card p-2">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="промо код">
-                            <button type="submit" class="btn btn-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Проверять</font></font></button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </form>
+    <script>
+        function translit(word){
+            var answer = '';
+            var converter = {
+                'а': 'a',    'б': 'b',    'в': 'v',    'г': 'g',    'д': 'd',
+                'е': 'e',    'ё': 'e',    'ж': 'zh',   'з': 'z',    'и': 'i',
+                'й': 'y',    'к': 'k',    'л': 'l',    'м': 'm',    'н': 'n',
+                'о': 'o',    'п': 'p',    'р': 'r',    'с': 's',    'т': 't',
+                'у': 'u',    'ф': 'f',    'х': 'h',    'ц': 'c',    'ч': 'ch',
+                'ш': 'sh',   'щ': 'sch',  'ь': '',     'ы': 'y',    'ъ': '',
+                'э': 'e',    'ю': 'yu',   'я': 'ya',
+
+                'А': 'A',    'Б': 'B',    'В': 'V',    'Г': 'G',    'Д': 'D',
+                'Е': 'E',    'Ё': 'E',    'Ж': 'Zh',   'З': 'Z',    'И': 'I',
+                'Й': 'Y',    'К': 'K',    'Л': 'L',    'М': 'M',    'Н': 'N',
+                'О': 'O',    'П': 'P',    'Р': 'R',    'С': 'S',    'Т': 'T',
+                'У': 'U',    'Ф': 'F',    'Х': 'H',    'Ц': 'C',    'Ч': 'Ch',
+                'Ш': 'Sh',   'Щ': 'Sch',  'Ь': '',     'Ы': 'Y',    'Ъ': '',
+                'Э': 'E',    'Ю': 'Yu',   'Я': 'Ya',   ' ': '-',    '/': '',
+            };
+            for (var i = 0; i < word.length; ++i ) {
+                if (converter[word[i]] == undefined){
+                    answer += word[i];
+                } else {
+                    answer += converter[word[i]];
+                }
+            }
+
+            return answer;
+        }
+
+        let name = document.querySelector('#name');
+        let slug = document.querySelector('#slug');
+
+        if(slug.value===""){
+            window.onload = function() {
+                name.addEventListener('input', function () {
+                    slug.value = translit(this.value);
+                });
+            }
+        }
+    </script>
 @endsection
