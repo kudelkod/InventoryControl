@@ -15,5 +15,9 @@ class Status extends Model
 
     protected $connection = 'mysql';
 
-//    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'about',
+    ];
+
 }

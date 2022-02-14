@@ -11,6 +11,7 @@ class Category extends Model
     use HasFactory;
 
     const ROOT = 1;
+    const ROOT_NAME = 'Корневая категория';
 
     protected $table = 'categories';
 
@@ -34,7 +35,7 @@ class Category extends Model
     {
 
         return new Attribute(
-                get: fn() => $this->isRoot() ? 'Корень' : $this->parentCategory->name,
+                get: fn() => $this->isRoot() ? Category::ROOT_NAME : $this->parentCategory->name,
         );
     }
 

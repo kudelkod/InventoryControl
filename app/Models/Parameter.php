@@ -5,21 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Manufacture extends Model
+class Parameter extends Model
 {
     use HasFactory;
 
-    protected $table = 'manufacturers';
+    protected $table = 'parameters';
 
     protected $keyType = 'integer';
 
     protected $connection = 'mysql';
 
-    protected $fillable =
-        [
-        'name',
-        'slug',
-        'description',
-        'address'
-        ];
+//    protected $fillable = [];
 }

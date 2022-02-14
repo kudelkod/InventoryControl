@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInventoryParametersTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateInventoryParametersTable extends Migration
      */
     public function up()
     {
-        Schema::create('inventory_parameters', function (Blueprint $table) {
+        Schema::create('inventory_parameter', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('inventory_id')->unsigned();
             $table->unsignedBigInteger('parameter_id')->unsigned();
+
+            $table->timestamps();
 
             $table->foreign('inventory_id')->references('id')->on('inventory');
             $table->foreign('parameter_id')->references('id')->on('parameters');
@@ -31,6 +33,6 @@ class CreateInventoryParametersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inventory_parameters');
+        Schema::dropIfExists('inventory_parameter');
     }
-}
+};

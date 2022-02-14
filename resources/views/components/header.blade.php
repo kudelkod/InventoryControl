@@ -8,8 +8,8 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
                 <li><a href="{{route('categories.index')}}" class="nav-link px-2 link-dark">Категории</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
+                <li><a href="{{route('statuses.edit')}}" class="nav-link px-2 link-dark">Статусы</a></li>
+                <li><a href="{{route('manufacturers.index')}}" class="nav-link px-2 link-dark">Производители</a></li>
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">

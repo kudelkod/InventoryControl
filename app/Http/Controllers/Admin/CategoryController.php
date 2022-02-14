@@ -22,7 +22,7 @@ class CategoryController extends Controller
 
         $categories = $service->getCategoriesWithPaginate(5);
 
-        return view('admin.index', compact('categories'));
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -55,6 +55,13 @@ class CategoryController extends Controller
            return back()->withErrors(['message'=>'Ошибка создания'])->withInput();
     }
 
+    /**
+     * @param CategoryServiceInterface $service
+     * @param $slug
+     * @return \Illuminate\Contracts\Foundation\Application|
+     * \Illuminate\Contracts\View\Factory|
+     * \Illuminate\Contracts\View\View
+     */
     public function edit(CategoryServiceInterface $service, $slug){
 //        dd($slug);
         $categoryList = $service->getCategoriesForCombobox();
@@ -64,18 +71,39 @@ class CategoryController extends Controller
         return view('admin.categories.edit', compact('category', 'categoryList'));
     }
 
-    public function update(CategoryUpdateRequest $request, CategoryServiceInterface $service, $slug){
+    /**
+     * @param CategoryUpdateRequest $request
+     * @param CategoryServiceInterface $service
+     * @param $slug
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(CategoryUpdateRequest $request, CategoryServiceInterface $service , $slug){
 
         $data = $request->input();
 
         $result = $service->updateCategory($data, $slug);
 
-        return redirect()->route('categories.index');
+        if($result){
+            return redirect()->route('categories.edit', $result->slug)
+                ->with(['success'=>'Успешно добавлено']);
+        }
+        else
+            return back()->withErrors(['message'=>'Ошибка создания'])->withInput();
+
+
     }
 
-    public function delete(CategoryDeleteRequest $request, CategoryServiceInterface $service, $slug){
+
+    /**
+     * @param CategoryDeleteRequest $request
+     * @param CategoryServiceInterface $service
+     * @param $slug
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(CategoryServiceInterface $service, $slug){
 
         $service->deleteCategory($slug);
+
         return redirect()->route('categories.index');
     }
 }

@@ -30,6 +30,7 @@
         <footer>
             @include('components.footer')
         </footer>
+        @yield('scripts')
     </div>
 </body>
 </html>

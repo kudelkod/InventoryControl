@@ -59,13 +59,16 @@ class CategoryService implements CategoryServiceInterface
     {
         // TODO: Implement updateCategory() method.
 
-        $item = $this->categoryRepository->getCategoryBySlug($slug);
+        $item = $this->getCategory($slug);
+
         $data['parent_category_id'] = $data['parent_category_id'] == $item->id ? 1 : $data['parent_category_id'];
 
-        $result = $item->update($data);
+        $item->update($data);
+
+        $result = $this->getCategory($data['slug']);
 
         if($result){
-            return true;
+            return $result;
         }
         else{
             return  false;
@@ -76,6 +79,7 @@ class CategoryService implements CategoryServiceInterface
     {
         // TODO: Implement deleteCategory() method.
         $item = $this->categoryRepository->getCategoryBySlug($slug);
+
         $item->destroy($item->id);
 //        return ->destroy($slug);
     }

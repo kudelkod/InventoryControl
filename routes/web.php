@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ManufactureController;
+use App\Http\Controllers\Admin\StatusController;
 use App\Http\Controllers\CategoryTestController;
+use App\Models\Status;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,9 +31,27 @@ Route::prefix('admin')->group(function (){
         Route::post('create/', [CategoryController::class, 'store'])->name('categories.store');
         Route::get('edit/{slug}', [CategoryController::class, 'edit'])->name('categories.edit');
         Route::post('edit/{slug}', [CategoryController::class, 'update'])->name('categories.update');
-        Route::post('delete/{slug}', [CategoryController::class, 'delete'])->name('categories.delete');
+        Route::delete('delete/{slug}', [CategoryController::class, 'delete'])->name('categories.delete');
 
         Route::resource('categories_test',CategoryTestController::class);
     });
 
+    Route::prefix('statuses')->group(function (){
+        Route::get('create/', [StatusController::class, 'create'])->name('statuses.create');
+        Route::post('create/', [StatusController::class, 'store'])->name('statuses.store');
+        Route::get('edit/',[StatusController::class, 'edit'])->name('statuses.edit');
+        Route::post('edit/',[StatusController::class, 'update'])->name('statuses.update');
+
+        Route::post('getAboutStatus',[StatusController::class, 'getAjaxStatus'])->name('statuses.getAboutStatus');
+    });
+
+    Route::prefix('manufacturers')->group(function (){
+        Route::get('/', [ManufactureController::class, 'index'])->name('manufacturers.index');
+        Route::get('/create', [ManufactureController::class, 'create'])->name('manufacturers.create');
+        Route::post('/create', [ManufactureController::class, 'store'])->name('manufacturers.store');
+        Route::get('edit/{slug}', [ManufactureController::class, 'edit'])->name('manufacturers.edit');
+        Route::post('edit/{slug}', [ManufactureController::class, 'update'])->name('manufacturers.update');
+        Route::delete('delete/{slug}', [ManufactureController::class, 'delete'])->name('manufacturers.delete');
+    });
 });
+
