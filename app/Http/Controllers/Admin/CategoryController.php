@@ -85,7 +85,7 @@ class CategoryController extends Controller
 
         if($result){
             return redirect()->route('categories.edit', $result->slug)
-                ->with(['success'=>'Успешно добавлено']);
+                ->with(['success'=>'Успешно обновлено']);
         }
         else
             return back()->withErrors(['message'=>'Ошибка создания'])->withInput();

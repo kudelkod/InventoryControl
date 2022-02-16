@@ -10,6 +10,7 @@
                 <li><a href="{{route('categories.index')}}" class="nav-link px-2 link-dark">Категории</a></li>
                 <li><a href="{{route('statuses.edit')}}" class="nav-link px-2 link-dark">Статусы</a></li>
                 <li><a href="{{route('manufacturers.index')}}" class="nav-link px-2 link-dark">Производители</a></li>
+                <li><a href="{{route('models.index')}}" class="nav-link px-2 link-dark">Модели</a></li>
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">

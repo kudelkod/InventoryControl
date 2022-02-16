@@ -179,6 +179,8 @@ return [
         App\Providers\CategoryServiceProvider::class,
         App\Providers\StatusServiceProvider::class,
         \App\Providers\ManufactureServiceProvider::class,
+        \App\Providers\ParameterServiceProvider::class,
+        \App\Providers\ModelServiceProvider::class,
 
     ],
 

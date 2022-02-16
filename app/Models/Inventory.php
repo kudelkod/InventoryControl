@@ -16,4 +16,9 @@ class Inventory extends Model
     protected $connection = 'mysql';
 
 //    protected $fillable = [];
+
+    public function parameters(){
+
+        return $this->belongsToMany(Parameter::class, 'inventory_parameter');
+    }
 }
