@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Type;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 use App\Models\Parameter;
 
@@ -47,5 +48,14 @@ class ParameterRepository extends BaseRepository
         ];
 
         return $this->model->select($columns)->where('id', $id);
+    }
+
+    public function getParametersType(){
+        $columns = [
+            'id',
+            'name',
+            ];
+
+        return Type::select($columns);
     }
 }
