@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class ParameterController extends Controller
 {
-    public function getType(ParameterServiceInterface $service){
-        return $service->getType();
+    public function getTypes(ParameterServiceInterface $service){
+        return $service->getTypes();
     }
 
     public function create(Request $request){

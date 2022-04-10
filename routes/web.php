@@ -66,7 +66,7 @@ Route::prefix('admin')->group(function (){
 
     Route::prefix('parameters')->group(function (){
         Route::post('/create', [ParameterController::class, 'create'])->name('parameters.create');
-        Route::get('getType', [ParameterController::class, 'getType'])->name('parameters.getType');
+        Route::get('getTypes', [ParameterController::class, 'getTypes'])->name('parameters.getTypes');
     });
 });
 

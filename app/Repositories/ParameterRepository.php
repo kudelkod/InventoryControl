@@ -50,12 +50,7 @@ class ParameterRepository extends BaseRepository
         return $this->model->select($columns)->where('id', $id);
     }
 
-    public function getParametersType(){
-        $columns = [
-            'id',
-            'name',
-            ];
-
-        return Type::select($columns);
+    public function getParametersTypes(){
+        return Type::get();
     }
 }

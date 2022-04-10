@@ -13,9 +13,10 @@ class ParameterService implements ParameterServiceInterface
         $this->parameterRepository = app(ParameterRepository::class);
     }
 
-    public function getType()
+    public function getTypes()
     {
         // TODO: Implement getType() method.
-        return $this->parameterRepository->getParametersType()->get();
+        $params = $this->parameterRepository->getParametersTypes()->toArray();
+        return $params;
     }
 }

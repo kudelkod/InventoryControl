@@ -23,7 +23,7 @@ class ModelController extends Controller
     }
 
     public function store(Request $request){
-
+        dd($request);
         $result = array_combine($request->parameter_name, $request->parameter_value);
         dd($result);
     }

@@ -83,15 +83,44 @@
     <script src="{{asset('js/app.js')}}"></script>
 
     <script>
+        $('#create_parameter_type_modal').change(function (){
+            let val = ($('#create_parameter_type_modal').val());
+
+            if(val === '1')
+                $('#create_value_place_modal').html(
+                    '<div class="form-check">'+
+                    '<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">'+
+                    '<label class="form-check-label" for="flexRadioDefault1">'+
+                    'Default radio'+
+                    '   </label>'+
+                    '</div>'+
+                    '<div class="form-check">'+
+                    '<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>'+
+                    '<label class="form-check-label" for="flexRadioDefault2">'+
+                    'Default checked radio'+
+                    '</label>'+
+                    '</div>');
+            else if(val === '2')
+                $('#create_value_place_modal').html('<input class="form-control" type="number" step="0.01" id="parameter_value_modal" name="parameter_value_modal[]" placeholder="Введите значение" required>')
+            else if(val === '3')
+                $('#create_value_place_modal').html('<input class="form-control" type="text" id="parameter_value_modal" name="parameter_value_modal[]" placeholder="Введите значение" required>')
+
+        })
+    </script>
+
+    <script>
         $('#modalCreateParameter').on('click', function (){
 
             $.ajax({
                 type: 'GET',
-                url: '{{route('parameters.getType')}}',
+                url: '{{route('parameters.getTypes')}}',
                 success: function (response){
-                    $('#parameter_type_place')
-                        .html('<select id="create_parameter_type_modal" name="create_parameter_type_modal" class="form-select">'+
-                              '</select>')
+                    let count = $('#create_parameter_type_modal option').length;
+                    if(count <= 0){
+                        response.forEach(item =>{
+                            $('#create_parameter_type_modal').append('<option value="'+ item.id +'">'+ item.name +'</option>')
+                        })
+                    }
                 }
             })
         })
@@ -100,7 +129,7 @@
     <script>
         $('#add_parameter_modal').on('click', function (){
             $('<input class="form-control mt-2 pt-2 mb-2 pb-2" readonly>').val($('#parameter_name_modal option:selected').text()).appendTo('#name_place');
-            $('<input class="form-control mt-2 pt-2 mb-2 pb-2" id="parameter_name" name="parameter_name[]" hidden>').val($('#parameter_name_modal').val()).appendTo('#name_place');
+            $('<input class="form-control mt-2 pt-2 mb-2 pb-2" id="parameter_id" name="parameter_id[]" hidden>').val($('#parameter_name_modal').val()).appendTo('#name_place');
             $('<input class="form-control mt-2 pt-2 mb-2 pb-2" id="parameter_value" name="parameter_value[]" readonly>').val($('#parameter_value_modal').val()).appendTo('#value_place');
         })
 
@@ -118,7 +147,6 @@
                     'id': id
                 },
                 success: function (response) {
-
                     if(response === '1')
                         $('#value_place_modal').html(
                             '<div class="form-check">'+
@@ -164,7 +192,7 @@
                     <div class="col-md-4">
                         <label for="create_parameter_type_modal">Тип параметра</label>
                         <div id="parameter_type_place">
-
+                            <select id="create_parameter_type_modal" name="create_parameter_type_modal" class="form-select"></select>
                         </div>
                     </div>
 
