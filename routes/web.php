@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ManufactureController;
 use App\Http\Controllers\Admin\ModelController;
 use App\Http\Controllers\Admin\ParameterController;
 use App\Http\Controllers\Admin\StatusController;
 use App\Http\Controllers\CategoryTestController;
-use App\Models\Status;
+use App\Modules\Categories\src\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,22 +20,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
-Auth::routes();
+//Auth::routes();
 
 Route::prefix('admin')->group(function (){
-    Route::prefix('categories')->group(function (){
-        Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
-        Route::get('create/', [CategoryController::class, 'create'])->name('categories.create');
-        Route::post('create/', [CategoryController::class, 'store'])->name('categories.store');
-        Route::get('edit/{slug}', [CategoryController::class, 'edit'])->name('categories.edit');
-        Route::post('edit/{slug}', [CategoryController::class, 'update'])->name('categories.update');
-        Route::delete('delete/{slug}', [CategoryController::class, 'delete'])->name('categories.delete');
-
-        Route::resource('categories_test',CategoryTestController::class);
-    });
+//    Route::prefix('categories')->group(function (){
+//        Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
+//        Route::get('create/', [CategoryController::class, 'create'])->name('categories.create');
+//        Route::post('create/', [CategoryController::class, 'store'])->name('categories.store');
+//        Route::get('edit/{slug}', [CategoryController::class, 'edit'])->name('categories.edit');
+//        Route::post('edit/{slug}', [CategoryController::class, 'update'])->name('categories.update');
+//        Route::delete('delete/{slug}', [CategoryController::class, 'delete'])->name('categories.delete');
+//
+//        Route::resource('categories_test',CategoryTestController::class);
+//    });
 
     Route::prefix('statuses')->group(function (){
         Route::get('create/', [StatusController::class, 'create'])->name('statuses.create');
@@ -70,3 +69,19 @@ Route::prefix('admin')->group(function (){
     });
 });
 
+
+//Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -1,28 +1,35 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Modules\Categories\src\Controllers;
 
-use App\Contracts\CategoryServiceInterface;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryCreateRequest;
-use App\Http\Requests\CategoryDeleteRequest;
-use App\Http\Requests\CategoryUpdateRequest;
-use App\Models\Category;
-use Illuminate\Http\Request;
+//use App\Http\Requests\CategoryDeleteRequest;
+use App\Modules\Categories\src\Requests\CategoryCreateRequest;
+use App\Modules\Categories\src\Requests\CategoryUpdateRequest;
+use App\Modules\Categories\src\Services\Contracts\CategoryServiceInterface;
 
 class CategoryController extends Controller
 {
+    private CategoryServiceInterface $categoryService;
+    public function __construct(CategoryServiceInterface $service)
+    {
+        $this->categoryService = $service;
+    }
+
     /**
      * @param CategoryServiceInterface $service
      * @return \Illuminate\Contracts\Foundation\Application|
      * \Illuminate\Contracts\View\Factory|
      * \Illuminate\Contracts\View\View
      */
-    public function index(CategoryServiceInterface $service){
+    public function index(){
+        return view('categories::index');
+    }
 
-        $categories = $service->getCategoriesWithPaginate(5);
+    public function getCategories(){
+        $categories = $this->categoryService->getCategories();
 
-        return view('admin.categories.index', compact('categories'));
+        return $categories;
     }
 
     /**
@@ -95,7 +102,6 @@ class CategoryController extends Controller
 
 
     /**
-     * @param CategoryDeleteRequest $request
      * @param CategoryServiceInterface $service
      * @param $slug
      * @return \Illuminate\Http\RedirectResponse

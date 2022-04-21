@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Contracts;
+namespace App\Modules\Categories\src\Services\Contracts;
 
 interface CategoryServiceInterface
 {
-    public function getCategoriesWithPaginate($perPage);
+    public function getCategories();
 
     public function getCategoriesForCombobox();
 

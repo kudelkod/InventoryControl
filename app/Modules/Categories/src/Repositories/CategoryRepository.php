@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Modules\Categories\src\Repositories;
 
+use App\Modules\Categories\src\Models\Category;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
-use App\Models\Category;
 
 /**
  * Class CategoryRepository.
@@ -31,7 +31,8 @@ class CategoryRepository extends BaseRepository
     public function getAllCategories(): mixed
     {
         $columns = ['id', 'parent_category_id', 'name', 'slug'];
-        return $this->model->select($columns);
+        return $this->model->select($columns)
+                           ->with(['parentCategory:id,name']);
     }
 
     public function getCategoriesForCombobox()

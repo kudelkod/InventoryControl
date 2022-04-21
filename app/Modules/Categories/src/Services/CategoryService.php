@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Modules\Categories\src\Services;
 
-use App\Contracts\CategoryServiceInterface;
-use App\Models\Category;
-use App\Repositories\CategoryRepository;
+use App\Modules\Categories\src\Models\Category;
+use App\Modules\Categories\src\Repositories\CategoryRepository;
+use App\Modules\Categories\src\Services\Contracts\CategoryServiceInterface;
 
 class CategoryService implements CategoryServiceInterface
 {
@@ -22,12 +22,12 @@ class CategoryService implements CategoryServiceInterface
      * @param $perPage
      * @return mixed
      */
-    public function getCategoriesWithPaginate($perPage): mixed
+    public function getCategories(): mixed
     {
         // TODO: Implement getAllCategories() method.
         $categories = $this->categoryRepository->getAllCategories();
 
-        return $categories->paginate($perPage);
+        return $categories->get()->toArray();
     }
 
     public function getCategoriesForCombobox()

@@ -6,9 +6,6 @@ use App\Contracts\StatusServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StatusAjaxRequest;
 use App\Http\Requests\StatusUpdateRequest;
-use App\Models\Category;
-use App\Models\Status;
-use Illuminate\Http\Request;
 
 class StatusController extends Controller
 {
