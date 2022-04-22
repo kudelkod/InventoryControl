@@ -18,7 +18,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="category in categories">
+                                <tr v-for="category in getCategories">
                                     <td>{{ category.id }}</td>
                                     <td>{{ category.name }}</td>
                                     <td v-if="category.parent_category_id === 0">
@@ -52,22 +52,19 @@ export default {
         ...mapGetters({
             'getCategories':'categoriesModule/getCategories',
         }),
-        categories:{
-            get(){
-                return this.getCategories;
-            }
+    },
+    data(){
+        return{
+
         }
     },
     methods:{
         ...mapActions({
             'fetchCategories':'categoriesModule/fetchCategories',
         }),
-        init(){
-            this.fetchCategories();
-        },
     },
     mounted() {
-        this.init();
+        this.fetchCategories();
     }
 }
 </script>
