@@ -4,6 +4,7 @@ namespace App\Modules\Categories\src\Services;
 
 use App\Modules\Categories\src\Models\Category;
 use App\Modules\Categories\src\Repositories\CategoryRepository;
+use App\Modules\Categories\src\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Modules\Categories\src\Services\Contracts\CategoryServiceInterface;
 
 class CategoryService implements CategoryServiceInterface
@@ -14,8 +15,8 @@ class CategoryService implements CategoryServiceInterface
     /**
      *
      */
-    public function __construct(){
-        $this->categoryRepository = app(CategoryRepository::class);
+    public function __construct(CategoryRepositoryInterface $repository){
+        $this->categoryRepository = $repository;
     }
 
     /**
@@ -30,57 +31,22 @@ class CategoryService implements CategoryServiceInterface
         return $categories->get()->toArray();
     }
 
-    public function getCategoriesForCombobox()
-    {
-        // TODO: Implement getCategoriesForCombobox() method.
-        return $this->categoryRepository->getCategoriesForCombobox();
-    }
-
     public function createCategory($data)
     {
         // TODO: Implement createCategory() method.
-        $item = (new Category())->create($data);
-
-        if($item){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return $this->categoryRepository->createCategory($data);
     }
 
-    public function getCategory($slug)
-    {
-        // TODO: Implement getCategory() method.
-        return $this->categoryRepository->getCategoryBySlug($slug);
-    }
-
-    public function updateCategory($data, $slug)
+    public function updateCategory($data, $id)
     {
         // TODO: Implement updateCategory() method.
-
-        $item = $this->getCategory($slug);
-
-        $data['parent_category_id'] = $data['parent_category_id'] == $item->id ? 1 : $data['parent_category_id'];
-
-        $item->update($data);
-
-        $result = $this->getCategory($data['slug']);
-
-        if($result){
-            return $result;
-        }
-        else{
-            return  false;
-        }
+        $this->categoryRepository->updateCategory($data, $id);
     }
 
-    public function deleteCategory($slug)
+    public function deleteCategory($id)
     {
         // TODO: Implement deleteCategory() method.
-        $item = $this->categoryRepository->getCategoryBySlug($slug);
 
-        $item->destroy($item->id);
-//        return ->destroy($slug);
+        return $this->categoryRepository->deleteCategory($id);
     }
 }

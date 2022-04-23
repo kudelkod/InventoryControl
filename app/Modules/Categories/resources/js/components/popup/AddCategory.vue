@@ -1,48 +1,42 @@
 <template>
-        <div class="modal fade" id="modalAddCategory" tabindex="-1" aria-hidden="false">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Добавить категорию</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable add" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Добавить категорию</h5>
+                <button type="button" class="btn-close" @click="closeShow"></button>
+            </div>
+            <div class="modal-body">
+                <form @submit="addNewCategory">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Название категории</label>
+                            <input class="form-control" v-model="name" required>
+                            <label>Родительская категория</label>
+                            <select class="form-select" v-model="parent_category_id" required>
+                                <option class="form-control" v-for="category in getCategories" :value="category.id">{{ category.name }}</option>
+                            </select>
+                            <label>Идентификатор категории</label>
+                            <input class="form-control" v-model="slug" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Описание категории</label>
+                            <textarea class="form-control" v-model="description" rows="7"></textarea>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <form @submit="addCategory">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Название категории</label>
-                                    <input class="form-control" v-model="name" required>
-
-                                    <label>Родительская категория</label>
-                                    <select class="form-select" v-model="parent_category_id" required>
-                                        <option class="form-control" v-for="category in getCategories" :value="category.id">{{ category.name }}</option>
-                                    </select>
-                                    <label>Идентификатор категории</label>
-                                    <input class="form-control" v-model="slug" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Описание категории</label>
-                                    <textarea class="form-control" v-model="description" rows="7"></textarea>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Добавить параметр</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                            </div>
-                        </form>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-sm">Добавить категорию</button>
                     </div>
-
-                </div>
+                </form>
             </div>
         </div>
-
+    </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
-    name: "AddCategoryModal",
+    name: "AddCategory",
     computed:{
         ...mapGetters({
             'getCategories':'categoriesModule/getCategories',
@@ -62,7 +56,14 @@ export default {
         }
     },
     methods:{
-        addCategory: function (){
+        ...mapActions({
+            'fetchCategories': "categoriesModule/fetchCategories",
+            'addCategory': "categoriesModule/addCategory",
+        }),
+        closeShow: function (){
+            this.$emit('closePopup')
+        },
+        addNewCategory: function (){
 
             const category = {
                 name: this.name,
@@ -71,12 +72,14 @@ export default {
                 description: this.description
             }
 
-            console.log(category)
+            this.addCategory(category).then((resp) => {
+                this.name = '';
+                this.parent_category_id = null;
+                this.description = null;
 
-            this.name = null;
-            this.parent_category_id = null;
-            this.slug = null;
-            this.description = null;
+                this.closeShow();
+                this.fetchCategories()
+            })
         },
         url_slug: function (s, opt){
             s = String(s);
@@ -195,8 +198,24 @@ export default {
 }
 </script>
 
-<style scoped>
-.modal-dialog{
+<style>
+.add_category__modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1055;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+    background:rgba(0,0,0,.7);
+}
+.add{
     max-width: 935px;
+}
+.modal-footer{
+    justify-content: end;
 }
 </style>

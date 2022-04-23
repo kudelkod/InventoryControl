@@ -3,12 +3,13 @@
 namespace App\Modules\Categories\src\Repositories;
 
 use App\Modules\Categories\src\Models\Category;
+use App\Modules\Categories\src\Repositories\Contracts\CategoryRepositoryInterface;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 
 /**
  * Class CategoryRepository.
  */
-class CategoryRepository extends BaseRepository
+class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface
 {
 
     public function __construct()
@@ -30,32 +31,29 @@ class CategoryRepository extends BaseRepository
      */
     public function getAllCategories(): mixed
     {
-        $columns = ['id', 'parent_category_id', 'name', 'slug'];
+        $columns = ['id', 'parent_category_id', 'name', 'slug', 'description'];
         return $this->model->select($columns)
                            ->with(['parentCategory:id,name']);
     }
 
-    public function getCategoriesForCombobox()
-    {
-        $columns = implode(',',['id',
-            'CONCAT (id,". ", name) AS id_name'
-        ]);
-
-        return $this->model->selectRaw($columns)
-                           ->toBase()
-                           ->get();
+    public function createCategory($data){
+        if($this->model->create($data))
+            return true;
+        return false;
     }
 
-    public function getCategoryBySlug($slug){
+    public function updateCategory($data, $id){
+        $item = $this->model->find($id);
 
-        $columns = ['id', 'parent_category_id', 'name', 'slug'];
-
-        return $this->model->select($columns)->where('slug', $slug)->first();
+        if ($item->update($data))
+            return true;
+        return false;
     }
 
-//    public function deleteCategory($id){
-//        $columns = ['id', 'parent_category_id', 'name', 'slug'];
-//
-//        return $this->model->destroy($id);
-//    }
+    public function deleteCategory($id){
+
+        if ($this->model->destroy($id))
+            return true;
+        return false;
+    }
 }

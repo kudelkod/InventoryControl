@@ -178,7 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         \App\Modules\Categories\src\CategoryServiceProvider::class,
         App\Providers\StatusServiceProvider::class,
-        \App\Providers\ManufactureServiceProvider::class,
+        \App\Modules\Manufacture\src\ManufactureServiceProvider::class,
         \App\Providers\ParameterServiceProvider::class,
         \App\Providers\ModelServiceProvider::class,
 

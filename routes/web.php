@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\ManufactureController;
 use App\Http\Controllers\Admin\ModelController;
 use App\Http\Controllers\Admin\ParameterController;
 use App\Http\Controllers\Admin\StatusController;
-use App\Http\Controllers\CategoryTestController;
-use App\Modules\Categories\src\Controllers\CategoryController;
+use App\Modules\Manufacture\src\Controllers\ManufactureController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,16 +70,16 @@ Route::prefix('admin')->group(function (){
 
 //Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');

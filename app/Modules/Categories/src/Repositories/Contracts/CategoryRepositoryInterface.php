@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\Categories\src\Services\Contracts;
+namespace App\Modules\Categories\src\Repositories\Contracts;
 
-interface CategoryServiceInterface
+interface CategoryRepositoryInterface
 {
-    public function getCategories();
+    public function getAllCategories();
 
     public function createCategory($data);
 

@@ -1,10 +1,13 @@
 <template>
     <div class="categories">
+        <transition name="fade">
+            <CategoryPopup :category="category" :component="component" v-if="showPopup" @closePopup="closePopup"></CategoryPopup>
+        </transition>
         <div class="container">
             <div class="justify-content-center">
                 <div class="col-md-12">
                     <nav class="navbar navbar-toggler navbar-light bg-gradient">
-                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddCategory">Добавить</a>
+                        <a class="btn btn-primary" @click="showAddPopup">Добавить категорию</a>
                     </nav>
                     <div class="card">
                         <div class="card-body">
@@ -25,7 +28,12 @@
                                         Корень
                                     </td>
                                     <td v-else>{{ category.parent_category.name }}</td>
-                                    <td>
+                                    <td v-if="category.id === 1">
+                                        <a class="btn btn-sm" hidden></a>
+                                    </td>
+                                    <td v-else>
+                                        <a class="btn btn-primary btn-sm" @click="showEditCategory(category)">Редактировать</a>
+                                        <a class="btn btn-danger btn-sm" @click="showDeletePopup(category)">Удалить</a>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -35,17 +43,16 @@
                 </div>
             </div>
         </div>
-        <AddCategoryModal></AddCategoryModal>
     </div>
 </template>
 
 <script>
 import {mapActions, mapGetters, mapMutations} from "vuex";
-import AddCategoryModal from "./AddCategoryModal";
+import CategoryPopup from "./popup/CategoryPopup";
 
 export default {
     components:{
-        AddCategoryModal
+        CategoryPopup,
     },
     name: "Categories",
     computed:{
@@ -55,13 +62,37 @@ export default {
     },
     data(){
         return{
-
+            category: null,
+            showPopup: false,
+            component: null,
+            component_type: {
+                add: 1,
+                edit: 2,
+                delete: 3
+            }
         }
     },
     methods:{
         ...mapActions({
             'fetchCategories':'categoriesModule/fetchCategories',
         }),
+        showAddPopup: function (){
+            this.showPopup = true;
+            this.component = this.component_type.add;
+        },
+        showEditCategory: function (category){
+            this.category = category
+            this.showPopup = true;
+            this.component = this.component_type.edit;
+        },
+        showDeletePopup: function (category){
+            this.category = category
+            this.showPopup = true;
+            this.component = this.component_type.delete;
+        },
+        closePopup: function (){
+            this.showPopup = false
+        }
     },
     mounted() {
         this.fetchCategories();
@@ -69,6 +100,11 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to{
+    opacity: 0;
+}
 </style>
