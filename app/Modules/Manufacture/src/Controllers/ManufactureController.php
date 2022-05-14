@@ -13,9 +13,14 @@ class ManufactureController extends Controller
         $this->manufactureService = $service;
     }
 
-    public function index(){
+    public function index()
+    {
+        return view('manufacturers::index');
+    }
 
-        return view('admin.manufacturers.index');
+    public function getManufacturers()
+    {
+        return $this->manufactureService->getManufacturers();
     }
 
 }

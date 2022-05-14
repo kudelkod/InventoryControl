@@ -25,6 +25,8 @@ class ManufactureRepository extends BaseRepository implements ManufactureReposit
     public function getManufacturers()
     {
         // TODO: Implement getManufacturers() method.
+        $columns = ['id', 'name', 'description', 'address'];
+        return $this->model->select($columns)->get();
     }
 
     public function createManufacture($data)

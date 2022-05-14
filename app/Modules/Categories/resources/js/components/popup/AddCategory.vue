@@ -195,23 +195,13 @@ export default {
             return opt.lowercase ? s.toLowerCase() : s;
         }
     },
+    mounted() {
+        this.fetchCategories();
+    }
 }
 </script>
 
 <style>
-.add_category__modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1055;
-    display: block;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    outline: 0;
-    background:rgba(0,0,0,.7);
-}
 .add{
     max-width: 935px;
 }

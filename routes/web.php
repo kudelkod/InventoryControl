@@ -44,14 +44,14 @@ Route::prefix('admin')->group(function (){
         Route::post('getAboutStatus',[StatusController::class, 'getAjaxStatus'])->name('statuses.getAboutStatus');
     });
 
-    Route::prefix('manufacturers')->group(function (){
-        Route::get('/', [ManufactureController::class, 'index'])->name('manufacturers.index');
-        Route::get('/create', [ManufactureController::class, 'create'])->name('manufacturers.create');
-        Route::post('/create', [ManufactureController::class, 'store'])->name('manufacturers.store');
-        Route::get('edit/{slug}', [ManufactureController::class, 'edit'])->name('manufacturers.edit');
-        Route::post('edit/{slug}', [ManufactureController::class, 'update'])->name('manufacturers.update');
-        Route::delete('delete/{slug}', [ManufactureController::class, 'delete'])->name('manufacturers.delete');
-    });
+//    Route::prefix('manufacturers')->group(function (){
+//        Route::get('/', [ManufactureController::class, 'index'])->name('manufacturers.index');
+//        Route::get('/create', [ManufactureController::class, 'create'])->name('manufacturers.create');
+//        Route::post('/create', [ManufactureController::class, 'store'])->name('manufacturers.store');
+//        Route::get('edit/{slug}', [ManufactureController::class, 'edit'])->name('manufacturers.edit');
+//        Route::post('edit/{slug}', [ManufactureController::class, 'update'])->name('manufacturers.update');
+//        Route::delete('delete/{slug}', [ManufactureController::class, 'delete'])->name('manufacturers.delete');
+//    });
 
     Route::prefix('models')->group(function (){
         Route::get('/', [ModelController::class, 'index'])->name('models.index');

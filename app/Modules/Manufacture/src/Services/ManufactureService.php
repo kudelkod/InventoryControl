@@ -19,6 +19,7 @@ class ManufactureService implements ManufactureServiceInterface
     public function getManufacturers()
     {
         // TODO: Implement getManufacturersWithPaginate() method.
+        return $this->manufactureRepository->getManufacturers()->toArray();
     }
 
     public function createManufacture($data)

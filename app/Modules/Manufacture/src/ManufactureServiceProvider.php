@@ -11,7 +11,7 @@ use Illuminate\Support\ServiceProvider;
 
 class ManufactureServiceProvider extends ServiceProvider
 {
-    private array $bindings = [
+    public array $bindings = [
         ManufactureServiceInterface::class => ManufactureService::class,
         ManufactureRepositoryInterface::class => ManufactureRepository::class
         ];
