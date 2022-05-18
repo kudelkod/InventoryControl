@@ -3,10 +3,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Добавить категорию</h5>
-                <button type="button" class="btn-close" @click="closeShow"></button>
+                <button type="button" class="btn-close" @click.prevent="closeShow"></button>
             </div>
             <div class="modal-body">
-                <form @submit="addNewCategory">
+                <form @submit.prevent="addNewCategory">
                     <div class="row">
                         <div class="col-md-6">
                             <label>Название категории</label>

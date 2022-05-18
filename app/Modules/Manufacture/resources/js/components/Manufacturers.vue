@@ -26,7 +26,7 @@
                                 <td>{{ manufacture.name }}</td>
                                 <td>{{ manufacture.address }}</td>
                                 <td class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <a class="btn btn-primary">Редактировать</a>
+                                    <a class="btn btn-primary" @click="showEditPopup(manufacture)">Редактировать</a>
                                     <a class="btn btn-danger">Удалить</a>
                                 </td>
                             </tr>
@@ -70,6 +70,11 @@ export default {
         }),
         showAddPopup(){
             this.component = this.component_type.add;
+            this.showPopup = true;
+        },
+        showEditPopup(manufacture){
+            this.component = this.component_type.edit;
+            this.manufacture = manufacture;
             this.showPopup = true;
         },
         closePopup(){

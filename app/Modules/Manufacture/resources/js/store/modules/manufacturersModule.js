@@ -22,24 +22,23 @@ export default {
                     commit('setManufacturers', response.data);
                 })
         },
-        // addCategory({commit}, category){
-        //     return new Promise((resolve, reject) => {
-        //         axios.post('/categories/addCategory',{
-        //             name: category.name,
-        //             parent_category_id: category.parent_category_id,
-        //             slug: category.slug,
-        //             description: category.description,
-        //         })
-        //             .then((response) =>
-        //                 resolve({
-        //                     result: true
-        //                 }))
-        //             .catch(error =>
-        //                 reject({
-        //                     result: false
-        //                 }))
-        //     })
-        // },
+        addManufacture({commit}, manufacture){
+            return new Promise((resolve, reject) => {
+                axios.post('/manufacturers/addManufacturers',{
+                    name: manufacture.name,
+                    address: manufacture.address,
+                    description: manufacture.description,
+                })
+                    .then((response) =>
+                        resolve({
+                            result: true
+                        }))
+                    .catch(error =>
+                        reject({
+                            result: false
+                        }))
+            })
+        },
         // deleteCategory({commit}, category){
         //     return new Promise((resolve, reject) => {
         //         axios.delete('/categories/'+category.id+'/deleteCategory',{

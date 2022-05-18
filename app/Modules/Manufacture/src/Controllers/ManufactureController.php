@@ -4,6 +4,7 @@ namespace App\Modules\Manufacture\src\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Manufacture\src\Services\Contracts\ManufactureServiceInterface;
+use Illuminate\Http\Request;
 
 class ManufactureController extends Controller
 {
@@ -23,4 +24,9 @@ class ManufactureController extends Controller
         return $this->manufactureService->getManufacturers();
     }
 
+    public function addManufacturers(Request $request){
+        $data = $request->input();
+
+        return $this->manufactureService->addManufacture($data);
+    }
 }

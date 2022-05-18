@@ -1,20 +1,22 @@
 <template>
     <div class="manufacture_popup">
         <AddManufacture v-if="component === 1" @closePopup="closePopup"></AddManufacture>
-<!--        <EditCategory :category="category" v-if="component === 2" @closePopup="closePopup"></EditCategory>-->
+        <EditManufacture :manufacture="manufacture" v-if="component === 2" @closePopup="closePopup"></EditManufacture>
 <!--        <DeleteCategory :category="category" v-if="component === 3" @closePopup="closePopup"></DeleteCategory>-->
     </div>
 </template>
 
 <script>
 import AddManufacture from "./AddManufacture";
+import EditManufacture from "./EditManufacture";
+
 export default {
     props:{
         component: null,
         manufacture: null
     },
     name: "ManufacturePopup",
-    components: {AddManufacture},
+    components: {EditManufacture, AddManufacture},
     methods:{
         closePopup: function (){
             this.$emit('closePopup')

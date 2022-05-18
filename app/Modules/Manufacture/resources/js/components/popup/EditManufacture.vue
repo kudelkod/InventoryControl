@@ -1,12 +1,12 @@
 <template>
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable add" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable edit" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Добавить производителя</h5>
+                <h5 class="modal-title">Редактировать производителя</h5>
                 <button type="button" class="btn-close" @click="closeShow"></button>
             </div>
             <div class="modal-body">
-                <form @submit.prevent="addNewManufacture">
+                <form @submit.prevent="editManufacture">
                     <div class="row">
                         <div class="col-md-6">
                             <label>Название производителя</label>
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary btn-sm">Добавить производителя</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Сохранить</button>
                     </div>
                 </form>
             </div>
@@ -29,50 +29,36 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
-
 export default {
-    name: "AddManufacture",
+    name: "EditManufacture",
+    props:{
+        manufacture: null,
+    },
     data(){
         return {
-            name: null,
-            address: null,
-            description: null,
+            name: this.manufacture.name,
+            address: this.manufacture.address,
+            description: this.manufacture.description,
         }
     },
-    methods: {
-        ...mapActions({
-            'fetchManufacturers': 'manufacturersModule/fetchManufacturers',
-            'addManufacture':'manufacturersModule/addManufacture',
+
+    methods:{
+        mapActions:({
+
         }),
         closeShow: function (){
             this.$emit('closePopup')
         },
 
-        addNewManufacture: function(){
-
-            const manufacture = {
-                name: this.name,
-                address: this.address,
-                description: this.description
-            }
-
-            this.addManufacture(manufacture).then((resp) => {
-                this.name = null;
-                this.address = null;
-                this.description = null;
-
-                this.closeShow();
-                this.fetchManufacturers();
-            })
+        editManufacture: function (){
 
         }
-    }
+    },
 }
 </script>
 
-<style>
-.add{
+<style scoped>
+.edit{
     max-width: 935px;
 }
 .modal-footer {

@@ -6,7 +6,7 @@ interface ManufactureServiceInterface
 {
     public function getManufacturers();
 
-    public function createManufacture($data);
+    public function addManufacture($data);
 
     public function deleteManufacture($id);
 
