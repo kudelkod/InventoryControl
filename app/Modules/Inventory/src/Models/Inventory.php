@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Inventory\src\Models;
 
+use App\Models\Parameter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,8 +18,4 @@ class Inventory extends Model
 
 //    protected $fillable = [];
 
-    public function parameters(){
-
-        return $this->belongsToMany(Parameter::class, 'inventory_parameter');
-    }
 }

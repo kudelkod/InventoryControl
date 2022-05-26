@@ -28,11 +28,11 @@ class ManufactureService implements ManufactureServiceInterface
 
     public function deleteManufacture($id)
     {
-        // TODO: Implement deleteManufacture() method.
+        return $this->manufactureRepository->deleteManufacture($id);
     }
 
-    public function updateManufacture($data, $slug)
+    public function updateManufacture($data, $id)
     {
-        // TODO: Implement updateManufacture() method.
+        return $this->manufactureRepository->updateManufacture($data, $id);
     }
 }

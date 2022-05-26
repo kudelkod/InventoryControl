@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Modules\Model\src\Repositories;
 
+use App\Modules\Model\src\Models\Model;
+use App\Modules\Model\src\Repositories\Contracts\ModelRepositoryInterface;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
-use App\Models\Model;
 
 /**
  * Class ModelRepository.
  */
-class ModelRepository extends BaseRepository
+class ModelRepository extends BaseRepository implements ModelRepositoryInterface
 {
 
     public function __construct()
@@ -27,13 +28,8 @@ class ModelRepository extends BaseRepository
 
     public function getAllModels(){
 
-        $columns=[
-            'id',
-            'name',
-            'year',
-            'manufacture_id'
-        ];
-
-        return $this->model->select($columns);
+        return$this->model->select('*')
+            ->get()
+            ->toArray();
     }
 }

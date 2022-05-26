@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Model\src\Models;
 
+use App\Models\Parameter;
 use App\Modules\Manufacture\src\Models\Manufacture;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,6 +25,14 @@ class Model extends StartModel
         'manufacture_id',
     ];
 
+    protected $appends = [
+        'manufacture_name'
+    ];
+
+    protected $casts = [
+        'year'=> 'datetime:d.m.Y'
+    ];
+
     public function parameters(){
 
         return $this->belongsToMany(Parameter::class, 'model_parameter', 'model_id', 'parameter_id');
@@ -36,7 +45,6 @@ class Model extends StartModel
 
     public function manufactureName(): Attribute
     {
-
         return new Attribute(
             get: fn()=> $this->manufacture->name,
 

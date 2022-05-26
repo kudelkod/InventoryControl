@@ -180,7 +180,7 @@ return [
         App\Providers\StatusServiceProvider::class,
         \App\Modules\Manufacture\src\ManufactureServiceProvider::class,
         \App\Providers\ParameterServiceProvider::class,
-        \App\Providers\ModelServiceProvider::class,
+        \App\Modules\Model\src\ModelServiceProvider::class,
 
     ],
 

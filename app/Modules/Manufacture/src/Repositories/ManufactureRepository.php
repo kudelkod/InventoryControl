@@ -17,7 +17,7 @@ class ManufactureRepository extends BaseRepository implements ManufactureReposit
         parent::__construct();
     }
 
-    public function model()
+    public function model(): string
     {
         return Manufacture::class;
     }
@@ -28,20 +28,26 @@ class ManufactureRepository extends BaseRepository implements ManufactureReposit
         return $this->model->select($columns)->get();
     }
 
-    public function createManufacture($data)
+    public function createManufacture($data): bool
     {
         if ($this->model->create($data))
             return true;
         return false;
     }
 
-    public function updateManufacture($data, $id)
+    public function updateManufacture($data, $id): bool
     {
-        // TODO: Implement updateManufacture() method.
+        $manufacture = $this->model->find($id);
+
+        if ($manufacture->update($data))
+            return true;
+        return false;
     }
 
-    public function deleteManufacture($id)
+    public function deleteManufacture($id): bool
     {
-        // TODO: Implement deleteManufacture() method.
+        if ($this->model->destroy($id))
+            return true;
+        return false;
     }
 }

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Modules\Model\src\Services;
 
-use App\Contracts\ModelServiceInterface;
-use App\Repositories\ModelRepository;
+use App\Modules\Model\src\Repositories\Contracts\ModelRepositoryInterface;
+use App\Modules\Model\src\Repositories\ModelRepository;
+use App\Modules\Model\src\Services\Contracts\ModelServiceInterface;
 use App\Repositories\ParameterRepository;
 
 class ModelService implements ModelServiceInterface
@@ -11,17 +12,17 @@ class ModelService implements ModelServiceInterface
     protected mixed $modelRepository;
     protected mixed $parameterRepository;
 
-    public function __construct(){
+    public function __construct(ModelRepositoryInterface $modelRepository){
 
-        $this->modelRepository = app(ModelRepository::class);
+        $this->modelRepository = $modelRepository;
         $this->parameterRepository = app(ParameterRepository::class);
     }
 
-    public function getAllWithPaginate($perPage)
+    public function getAllModels()
     {
         // TODO: Implement getAllWithPaginate() method.
 
-        return $this->modelRepository->getAllModels()->paginate($perPage);
+        return $this->modelRepository->getAllModels();
 
     }
 
