@@ -3,9 +3,8 @@
 namespace App\Modules\Model\src\Services;
 
 use App\Modules\Model\src\Repositories\Contracts\ModelRepositoryInterface;
-use App\Modules\Model\src\Repositories\ModelRepository;
+use App\Modules\Model\src\Repositories\ParameterRepository;
 use App\Modules\Model\src\Services\Contracts\ModelServiceInterface;
-use App\Repositories\ParameterRepository;
 
 class ModelService implements ModelServiceInterface
 {

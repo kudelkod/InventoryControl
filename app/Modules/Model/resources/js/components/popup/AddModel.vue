@@ -12,8 +12,11 @@
                             <label>Название модели</label>
                             <input class="form-control" required>
                             <label>Производитель модели</label>
-                            <select class="form-select" required>
-
+                            <select class="form-select" v-model="modelManufacture" required>
+                                <option selected disabled>Выберите производителя</option>
+                                <option v-for="manufacture in getManufacturers" @change="setManufacture(manufacture)">
+                                    {{ manufacture.name }}
+                                </option>
                             </select>
                             <label>Дата выпуска</label>
                             <input class="form-control" type="date" required>
@@ -23,6 +26,10 @@
                             <textarea class="form-control" rows="7"></textarea>
                         </div>
                     </div>
+<!--                    <div class="row">-->
+<!--                        <label>Параметры</label>-->
+
+<!--                    </div>-->
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary btn-sm">Добавить модель</button>
                     </div>
@@ -33,12 +40,38 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex";
+import vSelect from 'vue-select'
+
 export default {
     name: "AddModel",
+    components:{vSelect},
+    data(){
+        return{
+            modelManufacture: null,
+        }
+    },
+    computed:{
+        ...mapGetters({
+            'getManufacturers': 'manufacturersModule/getManufacturers'
+        }),
+    },
     methods:{
+        ...mapActions({
+            'fetchManufacturers': 'manufacturersModule/fetchManufacturers'
+        }),
         closeShow: function (){
             this.$emit('closePopup')
         },
+        setManufacture: function (manufacture){
+            this.modelManufacture = manufacture;
+        },
+        init: function (){
+            this.fetchManufacturers();
+        }
+    },
+    mounted() {
+        this.init();
     }
 }
 </script>

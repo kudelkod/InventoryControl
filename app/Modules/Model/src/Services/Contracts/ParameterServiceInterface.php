@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Contracts;
+namespace App\Modules\Model\src\Services\Contracts;
 
 interface ParameterServiceInterface
 {

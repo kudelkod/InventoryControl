@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Modules\Model\src\Controllers;
 
-use App\Contracts\ParameterServiceInterface;
 use App\Http\Controllers\Controller;
+use App\Modules\Model\src\Services\Contracts\ParameterServiceInterface;
 use Illuminate\Http\Request;
 
 class ParameterController extends Controller

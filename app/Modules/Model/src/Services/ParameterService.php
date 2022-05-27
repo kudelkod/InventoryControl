@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace App\Modules\Model\src\Services;
 
-use App\Contracts\ParameterServiceInterface;
-use App\Repositories\ParameterRepository;
+use App\Modules\Model\src\Repositories\ParameterRepository;
+use App\Modules\Model\src\Services\Contracts\ParameterServiceInterface;
 
 class ParameterService implements ParameterServiceInterface
 {
