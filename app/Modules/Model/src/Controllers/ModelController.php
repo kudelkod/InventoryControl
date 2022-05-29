@@ -23,6 +23,11 @@ class ModelController extends Controller
 
         return $this->modelsService->getAllModels();
     }
+
+    public function addModel(Request $request){
+        $data = $request->input();
+        $this->modelsService->addModel($data);
+    }
 //    public function create(ModelServiceInterface $service){
 //
 //        $parameters = $service->getParameters();

@@ -2,8 +2,8 @@
 
 namespace App\Modules\Model\src\Repositories;
 
-use App\Models\Parameter;
-use App\Models\Type;
+use App\Modules\Model\src\Models\Parameter;
+use App\Modules\Model\src\Models\Type;
 use App\Modules\Model\src\Repositories\Contracts\ParameterRepositoryInterface;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
 
@@ -27,17 +27,6 @@ class ParameterRepository extends BaseRepository implements ParameterRepositoryI
         return Parameter::class;
     }
 
-    public function getAllParameters(){
-
-        $columns = [
-            'id',
-            'name',
-            'type_id',
-            'value',
-        ];
-
-        return $this->model->select($columns);
-    }
 
     public function getParameter($id){
 
@@ -52,6 +41,18 @@ class ParameterRepository extends BaseRepository implements ParameterRepositoryI
     }
 
     public function getParametersTypes(){
-        return Type::get();
+        return Type::get()->toArray();
+    }
+
+    public function addParameters($data)
+    {
+        foreach ($data as $value){
+            try {
+                $this->model->create($value);
+            }catch (\Exception $e){
+                return false;
+            }
+        }
+        return true;
     }
 }

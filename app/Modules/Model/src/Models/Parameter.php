@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Model\src\Models;
 
 use App\Modules\Inventory\src\Models\Inventory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 class Parameter extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
 
     protected $table = 'parameters';
 
@@ -21,16 +23,16 @@ class Parameter extends Model
         'type_id',
         'name',
         'value',
+        'model_id',
         ];
 
-    public function inventory(){
-
-        return $this->belongsToMany(Inventory::class, 'inventory_parameter');
-    }
+    protected $appends = [
+        'type'
+    ];
 
     public function model(){
 
-        return $this->belongsToMany(Model::class, 'model_parameter');
+        return $this->belongsTo(Model::class, 'model_id', 'id');
     }
 
     public function type(){

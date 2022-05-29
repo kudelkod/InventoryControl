@@ -2,7 +2,6 @@
 
 namespace App\Modules\Model\src\Models;
 
-use App\Models\Parameter;
 use App\Modules\Manufacture\src\Models\Manufacture;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,7 +25,7 @@ class Model extends StartModel
     ];
 
     protected $appends = [
-        'manufacture_name'
+        'manufacture_name',
     ];
 
     protected $casts = [
@@ -35,7 +34,7 @@ class Model extends StartModel
 
     public function parameters(){
 
-        return $this->belongsToMany(Parameter::class, 'model_parameter', 'model_id', 'parameter_id');
+        return $this->hasMany(Parameter::class, 'model_id', 'id');
     }
 
     public function manufacture(){

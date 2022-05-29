@@ -32,4 +32,12 @@ class ModelRepository extends BaseRepository implements ModelRepositoryInterface
             ->get()
             ->toArray();
     }
+
+    public function addModel($data)
+    {
+        $newModelId = $this->model->create($data)->id;
+        if ($newModelId)
+            return $newModelId;
+        return false;
+    }
 }

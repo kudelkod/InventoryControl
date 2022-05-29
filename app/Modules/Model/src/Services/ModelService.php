@@ -3,6 +3,7 @@
 namespace App\Modules\Model\src\Services;
 
 use App\Modules\Model\src\Repositories\Contracts\ModelRepositoryInterface;
+use App\Modules\Model\src\Repositories\Contracts\ParameterRepositoryInterface;
 use App\Modules\Model\src\Repositories\ParameterRepository;
 use App\Modules\Model\src\Services\Contracts\ModelServiceInterface;
 
@@ -11,31 +12,41 @@ class ModelService implements ModelServiceInterface
     protected mixed $modelRepository;
     protected mixed $parameterRepository;
 
-    public function __construct(ModelRepositoryInterface $modelRepository){
+    public function __construct(
+        ModelRepositoryInterface $modelRepository,
+        ParameterRepositoryInterface $parameterRepository){
 
         $this->modelRepository = $modelRepository;
-        $this->parameterRepository = app(ParameterRepository::class);
+        $this->parameterRepository = $parameterRepository;
     }
 
     public function getAllModels()
     {
-        // TODO: Implement getAllWithPaginate() method.
-
         return $this->modelRepository->getAllModels();
-
     }
 
-    public function getParameters()
+    public function addModel($data)
     {
-        // TODO: Implement getAllTypes() method.
+        $parameters = $data['parameters'];
 
-        return $this->parameterRepository->getAllParameters()->get();
+        $modelId = $this->modelRepository->addModel($data);
+
+        $parameters = $this->addModelId($parameters, $modelId);
+
+        if ($this->parameterRepository->addParameters($parameters))
+            return true;
+        return false;
     }
 
-    public function getAjaxTypeId($id)
-    {
-        // TODO: Implement getAjaxTypeId() method.
+    private function addModelId($parameters, $modelId){
+        $newParameters = [];
 
-        return $this->parameterRepository->getParameter($id)->first();
+        foreach ($parameters as $parameter){
+            $parameter['model_id'] = $modelId;
+            $newParameters[] = $parameter;
+            unset($parameter);
+        }
+
+        return $newParameters;
     }
 }

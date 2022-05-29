@@ -1,16 +1,23 @@
 export default {
     namespaced: true,
     state:{
-        models: Array
+        models: Array,
+        types: Array,
     },
     getters:{
         getModels(state){
             return state.models;
+        },
+        getTypes(state){
+            return state.types;
         }
     },
     mutations:{
         setModels(state, data){
             state.models = data;
+        },
+        setParametersTypes(state, types){
+            state.types = types;
         }
     },
     actions:{
@@ -22,23 +29,33 @@ export default {
                     commit('setModels', response.data);
                 })
         },
-    //     addManufacture({commit}, manufacture){
-    //         return new Promise((resolve, reject) => {
-    //             axios.post('/manufacturers/addManufacturers',{
-    //                 name: manufacture.name,
-    //                 address: manufacture.address,
-    //                 description: manufacture.description,
-    //             })
-    //                 .then((response) =>
-    //                     resolve({
-    //                         result: true
-    //                     }))
-    //                 .catch(error =>
-    //                     reject({
-    //                         result: false
-    //                     }))
-    //         })
-    //     },
+        fetchParametersTypes({commit}){
+            return axios.get('/models/getTypes', {
+
+            })
+                .then((response)=>{
+                    commit('setParametersTypes', response.data);
+                })
+        },
+        addModel({commit}, model){
+            return new Promise((resolve, reject) => {
+                axios.post('/models/addModel',{
+                    name: model.name,
+                    manufacture_id: model.manufacturer.id,
+                    year: model.date,
+                    description: model.description,
+                    parameters: model.parameters,
+                })
+                    .then((response) =>
+                        resolve({
+                            result: true
+                        }))
+                    .catch(error =>
+                        reject({
+                            result: false
+                        }))
+            })
+        },
     //     deleteManufacture({commit}, manufacture){
     //         return new Promise((resolve, reject) => {
     //             axios.delete('/manufacturers/'+manufacture.id+'/deleteManufacture',{
