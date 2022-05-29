@@ -32,7 +32,7 @@
                     <div class="row" v-if="modelParameters.length === 0">
                         <h6>Данной модели еще не присвоены параметры</h6>
                     </div>
-                    <div class="row" v-if="modelParameters.length !== 0" v-for="parameter in modelParameters">
+                    <div class="row" v-if="modelParameters.length !== 0" v-for="(parameter, index) in modelParameters">
                         <div class="col-md-4">
                             <label>Название параметра</label>
                             <input class="form-control" type="text" v-model="parameter.name" required>
@@ -52,7 +52,6 @@
                                 v-if="parameter.type_id === parameterIdTypes.bool"
                                 type="checkbox"
                                 v-model="parameter.value"
-                                required
                             >
                             <input
                                 class="form-control"
@@ -70,6 +69,7 @@
                                 required
                             >
                             <h6 v-else>Выберите тип параметра</h6>
+                            <span style="font-size: 26px" @click="removeParameter(index)">-</span>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -113,6 +113,7 @@ export default {
         ...mapActions({
             'fetchManufacturers': 'manufacturersModule/fetchManufacturers',
             'fetchTypes': 'modelsModule/fetchParametersTypes',
+            'fetchModels': 'modelsModule/fetchModels',
             'addModel': 'modelsModule/addModel',
         }),
         closeShow: function (){
@@ -127,7 +128,10 @@ export default {
                 parameters: this.modelParameters,
             }
 
-            this.addModel(model);
+            this.addModel(model).then((resp)=>{
+                this.fetchModels();
+                this.closeShow();
+            });
         },
         addParameter: function(){
             const parameter = {
@@ -137,6 +141,9 @@ export default {
             };
 
             this.modelParameters.push(parameter)
+        },
+        removeParameter: function (index){
+            this.modelParameters.splice(index, 1)
         },
         init: function (){
             this.fetchManufacturers();

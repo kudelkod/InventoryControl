@@ -7,4 +7,6 @@ interface ParameterRepositoryInterface
     public function getParametersTypes();
 
     public function addParameters($data);
+
+    public function deleteModelParameters($modelId);
 }

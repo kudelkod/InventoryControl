@@ -56,20 +56,20 @@ export default {
                         }))
             })
         },
-    //     deleteManufacture({commit}, manufacture){
-    //         return new Promise((resolve, reject) => {
-    //             axios.delete('/manufacturers/'+manufacture.id+'/deleteManufacture',{
-    //             })
-    //                 .then((response) =>
-    //                     resolve({
-    //                         result: true
-    //                     }))
-    //                 .catch(error =>
-    //                     reject({
-    //                         result: false
-    //                     }))
-    //         })
-    //     },
+        deleteModel({commit}, model){
+            return new Promise((resolve, reject) => {
+                axios.delete('/models/'+model.id+'/deleteModel',{
+                })
+                    .then((response) =>
+                        resolve({
+                            result: true
+                        }))
+                    .catch(error =>
+                        reject({
+                            result: false
+                        }))
+            })
+        },
     //     editManufacture({commit}, manufacture){
     //         return new Promise((resolve, reject) => {
     //             axios.post('/manufacturers/'+manufacture.id+'/editManufacture',{

@@ -55,4 +55,9 @@ class ParameterRepository extends BaseRepository implements ParameterRepositoryI
         }
         return true;
     }
+
+    public function deleteModelParameters($modelId)
+    {
+        return $this->model->where('model_id', $modelId)->delete();
+    }
 }

@@ -40,4 +40,11 @@ class ModelRepository extends BaseRepository implements ModelRepositoryInterface
             return $newModelId;
         return false;
     }
+
+    public function deleteModel($id)
+    {
+        if ($this->model->destroy($id))
+            return true;
+        return false;
+    }
 }

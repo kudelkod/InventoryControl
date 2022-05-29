@@ -26,7 +26,11 @@ class ModelController extends Controller
 
     public function addModel(Request $request){
         $data = $request->input();
-        $this->modelsService->addModel($data);
+        return $this->modelsService->addModel($data);
+    }
+
+    public function deleteModel($id){
+        return $this->modelsService->deleteModel($id);
     }
 //    public function create(ModelServiceInterface $service){
 //

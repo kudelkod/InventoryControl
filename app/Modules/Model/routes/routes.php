@@ -8,5 +8,5 @@ Route::get('/', [ModelController::class, 'index']);
 Route::get('/getModels', [ModelController::class, 'getModels']);
 Route::get('/getTypes', [ParameterController::class, 'getTypes']);
 Route::post('/addModel', [ModelController::class, 'addModel']);
-//Route::delete('/{id}/deleteManufacture', [ManufactureController::class, 'deleteManufacture']);
+Route::delete('/{id}/deleteModel', [ModelController::class, 'deleteModel']);
 //Route::post('{id}/editManufacture', [ManufactureController::class, 'editManufacture']);

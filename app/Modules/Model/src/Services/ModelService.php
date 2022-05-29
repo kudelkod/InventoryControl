@@ -38,6 +38,12 @@ class ModelService implements ModelServiceInterface
         return false;
     }
 
+    public function deleteModel($id)
+    {
+        $this->parameterRepository->deleteModelParameters($id);
+        return $this->modelRepository->deleteModel($id);
+    }
+
     private function addModelId($parameters, $modelId){
         $newParameters = [];
 

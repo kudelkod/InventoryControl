@@ -80,7 +80,7 @@ export default {
             this.component = this.component_type.edit;
         },
         showDeletePopup: function (model){
-            this.category = model
+            this.model = model
             this.showPopup = true;
             this.component = this.component_type.delete;
         },

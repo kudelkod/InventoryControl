@@ -2,16 +2,17 @@
     <div class="model_popup">
         <AddModel v-if="component === 1" @closePopup="closePopup"></AddModel>
 <!--        <EditManufacture :manufacture="manufacture" v-if="component === 2" @closePopup="closePopup"></EditManufacture>-->
-<!--        <DeleteManufacture :manufacture="manufacture" v-if="component === 3" @closePopup="closePopup"></DeleteManufacture>-->
+        <DeleteModel :model="model" v-if="component === 3" @closePopup="closePopup"></DeleteModel>
     </div>
 </template>
 
 <script>
 import AddModel from "./AddModel";
+import DeleteModel from "./DeleteModel";
 
 export default {
     name: "ModelPopup",
-    components:{AddModel,},
+    components:{AddModel, DeleteModel},
     props:{
         component: null,
         model: null
