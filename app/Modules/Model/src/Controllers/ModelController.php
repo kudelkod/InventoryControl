@@ -29,27 +29,17 @@ class ModelController extends Controller
         return $this->modelsService->addModel($data);
     }
 
+    public function editModel(Request $request, $id){
+        $data = $request->input();
+
+        return $this->modelsService->editModel($data, $id);
+    }
+
     public function deleteModel($id){
         return $this->modelsService->deleteModel($id);
     }
-//    public function create(ModelServiceInterface $service){
-//
-//        $parameters = $service->getParameters();
-//
-//        return view('admin.models.create', compact('parameters'));
-//    }
-//
-//    public function store(Request $request){
-//        dd($request);
-//        $result = array_combine($request->parameter_name, $request->parameter_value);
-//        dd($result);
-//    }
-//
-//    public function getAjaxTypeId(Request $request, ModelServiceInterface $service){
-//
-//        $parameter = $service->getAjaxTypeId($request->id);
-//
-//        return $parameter->type_id;
-//    }
 
+    public function getModelParameters($id){
+        return $this->modelsService->getModelParameters($id);
+    }
 }

@@ -29,7 +29,7 @@ class Model extends StartModel
     ];
 
     protected $casts = [
-        'year'=> 'datetime:d.m.Y'
+        'year'=> 'datetime:Y-m-d'
     ];
 
     public function parameters(){

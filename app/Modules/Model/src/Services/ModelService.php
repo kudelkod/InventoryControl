@@ -44,6 +44,24 @@ class ModelService implements ModelServiceInterface
         return $this->modelRepository->deleteModel($id);
     }
 
+    public function getModelParameters($id)
+    {
+        return $this->parameterRepository->getModelParameters($id);
+    }
+
+    public function editModel($data, $id)
+    {
+        $parameters = $data['parameters'];
+
+        $this->modelRepository->editModel($data, $id);
+
+        $parameters = $this->addModelId($parameters, $id);
+
+        if ($this->parameterRepository->editModelParameters($parameters, $id))
+            return true;
+        return false;
+    }
+
     private function addModelId($parameters, $modelId){
         $newParameters = [];
 

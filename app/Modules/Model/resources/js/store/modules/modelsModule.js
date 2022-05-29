@@ -3,6 +3,7 @@ export default {
     state:{
         models: Array,
         types: Array,
+        modelParameters: Array,
     },
     getters:{
         getModels(state){
@@ -10,6 +11,9 @@ export default {
         },
         getTypes(state){
             return state.types;
+        },
+        getModelParameters(state){
+            return state.modelParameters
         }
     },
     mutations:{
@@ -18,6 +22,9 @@ export default {
         },
         setParametersTypes(state, types){
             state.types = types;
+        },
+        setModelParameters(state, parameters){
+            state.modelParameters = parameters;
         }
     },
     actions:{
@@ -37,9 +44,17 @@ export default {
                     commit('setParametersTypes', response.data);
                 })
         },
+        fetchModelParameters({commit}, model){
+            return axios.get('/models/'+model.id+'/getModelParameters',{
+
+            })
+                .then((response)=>{
+                    commit('setModelParameters', response.data);
+                })
+        },
         addModel({commit}, model){
             return new Promise((resolve, reject) => {
-                axios.post('/models/addModel',{
+                axios.post('/models/'+model.id+'/editModel',{
                     name: model.name,
                     manufacture_id: model.manufacturer.id,
                     year: model.date,
@@ -70,22 +85,24 @@ export default {
                         }))
             })
         },
-    //     editManufacture({commit}, manufacture){
-    //         return new Promise((resolve, reject) => {
-    //             axios.post('/manufacturers/'+manufacture.id+'/editManufacture',{
-    //                 name: manufacture.name,
-    //                 address: manufacture.address,
-    //                 description: manufacture.description,
-    //             })
-    //                 .then((response) =>
-    //                     resolve({
-    //                         result: true
-    //                     }))
-    //                 .catch(error =>
-    //                     reject({
-    //                         result: false
-    //                     }))
-    //         })
-    //     }
+        editModel({commit}, model){
+            return new Promise((resolve, reject) => {
+                axios.post('/models/'+model.id+'/editModel',{
+                    name: model.name,
+                    manufacture_id: model.manufacturer.id,
+                    year: model.date,
+                    description: model.description,
+                    parameters: model.parameters,
+                })
+                    .then((response) =>
+                        resolve({
+                            result: true
+                        }))
+                    .catch(error =>
+                        reject({
+                            result: false
+                        }))
+            })
+        }
     },
 }

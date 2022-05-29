@@ -60,4 +60,30 @@ class ParameterRepository extends BaseRepository implements ParameterRepositoryI
     {
         return $this->model->where('model_id', $modelId)->delete();
     }
+
+    public function getModelParameters($modelId)
+    {
+        return $this->model->where('model_id', $modelId)
+            ->get()
+            ->toarray();
+    }
+
+    public function editModelParameters($parameters, $modelId)
+    {
+        foreach ($parameters as $parameter){
+            try{
+                if (isset($parameter['id'])){
+                    $oldParameter = $this->model->find($parameter['id']);
+                    $oldParameter->update($parameter);
+                }
+                else{
+                    $this->model->create($parameter);
+                }
+            }
+            catch (\Exception $e){
+                return false;
+            }
+        }
+        return true;
+    }
 }

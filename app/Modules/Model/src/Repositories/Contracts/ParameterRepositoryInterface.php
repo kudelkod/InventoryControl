@@ -9,4 +9,8 @@ interface ParameterRepositoryInterface
     public function addParameters($data);
 
     public function deleteModelParameters($modelId);
+
+    public function getModelParameters($modelId);
+
+    public function editModelParameters($parameters, $modelId);
 }

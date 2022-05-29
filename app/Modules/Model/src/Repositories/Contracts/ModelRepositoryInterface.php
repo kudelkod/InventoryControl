@@ -9,4 +9,6 @@ interface ModelRepositoryInterface
     public function addModel($data);
 
     public function deleteModel($id);
+
+    public function editModel($data, $id);
 }
