@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\ModelController;
-use App\Http\Controllers\Admin\ParameterController;
 use App\Http\Controllers\Admin\StatusController;
-use App\Modules\Manufacture\src\Controllers\ManufactureController;
+use App\Modules\Model\src\Controllers\ModelController;
+use App\Modules\Model\src\Controllers\ParameterController;
 use Illuminate\Support\Facades\Route;
 
 /*

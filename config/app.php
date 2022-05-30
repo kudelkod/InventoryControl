@@ -177,10 +177,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         \App\Modules\Categories\src\CategoryServiceProvider::class,
-        App\Providers\StatusServiceProvider::class,
         \App\Modules\Manufacture\src\ManufactureServiceProvider::class,
-        \App\Providers\ParameterServiceProvider::class,
-        \App\Providers\ModelServiceProvider::class,
+        \App\Modules\Model\src\ModelServiceProvider::class,
 
     ],
 

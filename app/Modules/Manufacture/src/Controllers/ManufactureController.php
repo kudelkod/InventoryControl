@@ -29,4 +29,15 @@ class ManufactureController extends Controller
 
         return $this->manufactureService->addManufacture($data);
     }
+
+    public function editManufacture(Request $request, $id){
+        $data = $request->input();
+
+        return $this->manufactureService->updateManufacture($data, $id);
+    }
+
+    public function deleteManufacture($id){
+
+        return $this->manufactureService->deleteManufacture($id);
+    }
 }

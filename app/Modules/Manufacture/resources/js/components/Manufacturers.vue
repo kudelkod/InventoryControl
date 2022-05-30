@@ -27,7 +27,7 @@
                                 <td>{{ manufacture.address }}</td>
                                 <td class="d-grid gap-2 d-md-flex justify-content-md-end">
                                     <a class="btn btn-primary" @click="showEditPopup(manufacture)">Редактировать</a>
-                                    <a class="btn btn-danger">Удалить</a>
+                                    <a class="btn btn-danger" @click="showDeletePopup(manufacture)">Удалить</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -76,6 +76,11 @@ export default {
             this.component = this.component_type.edit;
             this.manufacture = manufacture;
             this.showPopup = true;
+        },
+        showDeletePopup(manufacture){
+            this.component = this.component_type.delete;
+            this.manufacture = manufacture;
+            this.showPopup = true
         },
         closePopup(){
             this.showPopup = false;

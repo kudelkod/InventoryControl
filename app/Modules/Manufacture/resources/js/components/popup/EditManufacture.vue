@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" @click="closeShow"></button>
             </div>
             <div class="modal-body">
-                <form @submit.prevent="editManufacture">
+                <form @submit.prevent="editManufacturers">
                     <div class="row">
                         <div class="col-md-6">
                             <label>Название производителя</label>
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
     name: "EditManufacture",
     props:{
@@ -36,6 +38,7 @@ export default {
     },
     data(){
         return {
+            id: this.manufacture.id,
             name: this.manufacture.name,
             address: this.manufacture.address,
             description: this.manufacture.description,
@@ -43,15 +46,28 @@ export default {
     },
 
     methods:{
-        mapActions:({
-
+        ...mapActions({
+            "editManufacture": "manufacturersModule/editManufacture",
+            "fetchManufacturers": "manufacturersModule/fetchManufacturers",
         }),
         closeShow: function (){
             this.$emit('closePopup')
         },
 
-        editManufacture: function (){
+        editManufacturers: function (){
+            const manufacture = {
+                id: this.id,
+                name: this.name,
+                address: this.address,
+                description: this.description,
+            };
 
+            this.editManufacture(manufacture).then((resp)=>{
+                console.log(resp);
+
+                this.closeShow();
+                this.fetchManufacturers();
+            })
         }
     },
 }
