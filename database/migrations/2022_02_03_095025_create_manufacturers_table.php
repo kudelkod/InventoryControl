@@ -18,7 +18,6 @@ class CreateManufacturersTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->text('description_html')->nullable();
             $table->string('address');
 
             $table->timestamps();

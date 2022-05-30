@@ -28,7 +28,7 @@
                                 <td>{{ model.manufacture_name }}</td>
                                 <td>{{ model.year }}</td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm" @click="showEditCategory(model)">Редактировать</a>
+                                    <a class="btn btn-primary btn-sm" @click="showEditPopup(model)">Редактировать</a>
                                     <a class="btn btn-danger btn-sm" @click="showDeletePopup(model)">Удалить</a>
                                 </td>
                             </tr>
@@ -74,13 +74,13 @@ export default {
             this.showPopup = true;
             this.component = this.component_type.add;
         },
-        showEditCategory: function (model){
+        showEditPopup: function (model){
             this.model = model
             this.showPopup = true;
             this.component = this.component_type.edit;
         },
         showDeletePopup: function (model){
-            this.category = model
+            this.model = model
             this.showPopup = true;
             this.component = this.component_type.delete;
         },

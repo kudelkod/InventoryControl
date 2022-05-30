@@ -26,8 +26,12 @@ export default {
             return new Promise((resolve, reject) => {
                 axios.post('/manufacturers/addManufacturers',{
                     name: manufacture.name,
-                    address: manufacture.address,
                     description: manufacture.description,
+                    country: manufacture.country,
+                    city: manufacture.city,
+                    street: manufacture.street,
+                    house_number: manufacture.house_number,
+                    postcode: manufacture.postcode,
                 })
                     .then((response) =>
                         resolve({
@@ -57,8 +61,12 @@ export default {
             return new Promise((resolve, reject) => {
                 axios.post('/manufacturers/'+manufacture.id+'/editManufacture',{
                     name: manufacture.name,
-                    address: manufacture.address,
                     description: manufacture.description,
+                    country: manufacture.country,
+                    city: manufacture.city,
+                    street: manufacture.street,
+                    house_number: manufacture.house_number,
+                    postcode: manufacture.postcode,
                 })
                     .then((response) =>
                         resolve({

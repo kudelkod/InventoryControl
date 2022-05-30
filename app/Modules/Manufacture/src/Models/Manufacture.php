@@ -18,8 +18,11 @@ class Manufacture extends Model
     protected $fillable =
         [
         'name',
-        'slug',
         'description',
-        'address'
+        'country',
+        'city',
+        'street',
+        'house_number',
+        'postcode',
         ];
 }

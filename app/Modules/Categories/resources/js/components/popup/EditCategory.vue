@@ -15,8 +15,6 @@
                             <select class="form-select" v-model="parent_category_id" required>
                                 <option class="form-control" v-for="category in getCategories" :value="category.id">{{ category.name }}</option>
                             </select>
-                            <label>Идентификатор категории</label>
-                            <input class="form-control" v-model="slug" required>
                         </div>
                         <div class="col-md-6">
                             <label>Описание категории</label>
@@ -52,12 +50,6 @@ export default {
             name: this.category.name,
             parent_category_id: this.category.parent_category_id,
             description: this.category.description,
-            slug: this.category.slug,
-        }
-    },
-    watch:{
-        name(value){
-            this.slug = this.url_slug(value)
         }
     },
     methods:{
@@ -74,7 +66,6 @@ export default {
                 id: this.id,
                 name: this.name,
                 parent_category_id: this.parent_category_id,
-                slug: this.slug,
                 description: this.description
             }
 
@@ -85,66 +76,6 @@ export default {
                 this.fetchCategories()
             })
         },
-        url_slug: function (s, opt){
-            s = String(s);
-            opt = Object(opt);
-
-            var defaults = {
-                'delimiter': '-',
-                'limit': undefined,
-                'lowercase': true,
-                'replacements': {},
-                'transliterate': true,
-            };
-
-            // Merge options
-            for (var k in defaults) {
-                if (!opt.hasOwnProperty(k)) {
-                    opt[k] = defaults[k];
-                }
-            }
-
-            var char_map = {
-                // Russian
-                'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D', 'Е': 'E', 'Ё': 'Yo', 'Ж': 'Zh',
-                'З': 'Z', 'И': 'I', 'Й': 'J', 'К': 'K', 'Л': 'L', 'М': 'M', 'Н': 'N', 'О': 'O',
-                'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 'У': 'U', 'Ф': 'F', 'Х': 'H', 'Ц': 'C',
-                'Ч': 'Ch', 'Ш': 'Sh', 'Щ': 'Sh', 'Ъ': '', 'Ы': 'Y', 'Ь': '', 'Э': 'E', 'Ю': 'Yu',
-                'Я': 'Ya',
-                'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh',
-                'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
-                'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'ts',
-                'ч': 'ch', 'ш': 'sh', 'щ': 'sh', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu',
-                'я': 'ya',
-            };
-
-            // Make custom replacements
-            for (var k in opt.replacements) {
-                s = s.replace(RegExp(k, 'g'), opt.replacements[k]);
-            }
-
-            // Transliterate characters to ASCII
-            if (opt.transliterate) {
-                for (var k in char_map) {
-                    s = s.replace(RegExp(k, 'g'), char_map[k]);
-                }
-            }
-
-            // Replace non-alphanumeric characters with our delimiter
-            var alnum = RegExp('[^a-z0-9]+', 'ig');
-            s = s.replace(alnum, opt.delimiter);
-
-            // Remove duplicate delimiters
-            s = s.replace(RegExp('[' + opt.delimiter + ']{2,}', 'g'), opt.delimiter);
-
-            // Truncate slug to max. characters
-            s = s.substring(0, opt.limit);
-
-            // Remove delimiter from ends
-            s = s.replace(RegExp('(^' + opt.delimiter + '|' + opt.delimiter + '$)', 'g'), '');
-
-            return opt.lowercase ? s.toLowerCase() : s;
-        }
     },
 }
 </script>

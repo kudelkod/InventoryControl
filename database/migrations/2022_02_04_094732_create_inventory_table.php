@@ -19,7 +19,6 @@ class CreateInventoryTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description');
-            $table->text('description_html');
 
             $table->unsignedBigInteger('category_id')->unsigned();
             $table->unsignedBigInteger('model_id')->unsigned();

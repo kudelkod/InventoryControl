@@ -40,4 +40,18 @@ class ModelRepository extends BaseRepository implements ModelRepositoryInterface
             return $newModelId;
         return false;
     }
+
+    public function editModel($data, $id)
+    {
+        $model = $this->model->find($id);
+
+        return $model->update($data);
+    }
+
+    public function deleteModel($id)
+    {
+        if ($this->model->destroy($id))
+            return true;
+        return false;
+    }
 }

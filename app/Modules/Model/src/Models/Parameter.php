@@ -27,7 +27,7 @@ class Parameter extends Model
         ];
 
     protected $appends = [
-        'type'
+        'type_name'
     ];
 
     public function model(){

@@ -1,19 +1,19 @@
 <template>
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable add" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable edit" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Добавить производителя</h5>
                 <button type="button" class="btn-close" @click="closeShow"></button>
             </div>
             <div class="modal-body">
-                <form @submit.prevent="addNewModel()">
+                <form @submit.prevent="editThisModel()">
                     <div class="row">
                         <div class="col-md-6">
                             <label>Название модели</label>
                             <input class="form-control" v-model="modelName" required>
                             <label>Производитель модели</label>
                             <select class="form-select" v-model="modelManufacture" required>
-                                <option selected disabled>Выберите производителя</option>
+                                <option selected disabled hidden :value="modelManufacture">{{modelManufacture.name}}</option>
                                 <option v-for="manufacture in getManufacturers" :value="manufacture">
                                     {{ manufacture.name }}
                                 </option>
@@ -29,10 +29,10 @@
                     <div class="row">
                         <h5>Параметры <span style="font-size: 26px; cursor: pointer" @click="addParameter()">+</span></h5>
                     </div>
-                    <div class="row" v-if="modelParameters.length === 0">
+                    <div class="row" v-if="getModelParameters.length === 0">
                         <h6>Данной модели еще не присвоены параметры</h6>
                     </div>
-                    <div class="row" v-if="modelParameters.length !== 0" v-for="(parameter, index) in modelParameters">
+                    <div class="row" v-if="getModelParameters.length !== 0" v-for="(parameter, index) in getModelParameters">
                         <div class="col-md-4">
                             <label>Название параметра</label>
                             <input class="form-control" type="text" v-model="parameter.name" required>
@@ -51,15 +51,17 @@
                                 class="form-check"
                                 v-if="parameter.type_id === parameterIdTypes.bool"
                                 type="checkbox"
+                                true-value="1"
+                                false-value="0"
                                 v-model="parameter.value"
-                            >
+                            />
                             <input
                                 class="form-control"
                                 v-else-if="parameter.type_id === parameterIdTypes.string"
                                 type="text"
                                 v-model="parameter.value"
                                 required
-                            >
+                            />
                             <input
                                 class="form-control"
                                 v-else-if="parameter.type_id === parameterIdTypes.number"
@@ -67,13 +69,13 @@
                                 step="0.01"
                                 v-model="parameter.value"
                                 required
-                            >
+                            />
                             <h6 v-else>Выберите тип параметра</h6>
                             <span style="font-size: 26px" @click="removeParameter(index)">-</span>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary btn-sm">Добавить модель</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Сохранить модель</button>
                     </div>
                 </form>
             </div>
@@ -82,19 +84,20 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
-import vSelect from 'vue-select'
+import {mapActions, mapGetters, mapMutations} from "vuex";
 
 export default {
-    name: "AddModel",
-    components:{vSelect},
+    props:{
+        model: null,
+    },
+    name: "EditModel",
     data(){
         return{
-            modelName: null,
-            modelDate: null,
-            modelDescription: null,
-            modelManufacture: null,
-            modelParameters: [],
+            modelId: this.model.id,
+            modelName: this.model.name,
+            modelDate: this.model.year,
+            modelDescription: this.model.description,
+            modelManufacture: this.model.manufacture,
 
             parameterIdTypes:{
                 bool: 1,
@@ -107,6 +110,7 @@ export default {
         ...mapGetters({
             'getManufacturers': 'manufacturersModule/getManufacturers',
             'getTypes': 'modelsModule/getTypes',
+            'getModelParameters': 'modelsModule/getModelParameters',
         }),
     },
     methods:{
@@ -114,21 +118,26 @@ export default {
             'fetchManufacturers': 'manufacturersModule/fetchManufacturers',
             'fetchTypes': 'modelsModule/fetchParametersTypes',
             'fetchModels': 'modelsModule/fetchModels',
-            'addModel': 'modelsModule/addModel',
+            'fetchModelParameters': 'modelsModule/fetchModelParameters',
+            'editModel': 'modelsModule/addModel',
+        }),
+        ...mapMutations({
+            'setModelParameters': 'modelsModule/setModelParameters'
         }),
         closeShow: function (){
             this.$emit('closePopup')
         },
-        addNewModel: function(){
+        editThisModel: function(){
             const model ={
+                id: this.modelId,
                 name: this.modelName,
                 manufacturer: this.modelManufacture,
                 date: this.modelDate,
                 description: this.modelDescription,
-                parameters: this.modelParameters,
+                parameters: this.getModelParameters,
             }
 
-            this.addModel(model).then((resp)=>{
+            this.editModel(model).then((resp)=>{
                 this.fetchModels();
                 this.closeShow();
             });
@@ -140,14 +149,17 @@ export default {
                 value: null,
             };
 
-            this.modelParameters.push(parameter)
+            this.getModelParameters.push(parameter)
+            this.setModelParameters(this.getModelParameters);
         },
         removeParameter: function (index){
-            this.modelParameters.splice(index, 1)
+            this.getModelParameters.splice(index, 1)
+            this.setModelParameters(this.getModelParameters);
         },
         init: function (){
             this.fetchManufacturers();
             this.fetchTypes();
+            this.fetchModelParameters(this.model);
         }
     },
     mounted() {
@@ -157,7 +169,7 @@ export default {
 </script>
 
 <style scoped>
-.add{
+.edit{
     max-width: 935px;
 }
 .modal-footer {
