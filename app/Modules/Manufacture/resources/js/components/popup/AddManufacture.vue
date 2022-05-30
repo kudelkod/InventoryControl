@@ -11,8 +11,16 @@
                         <div class="col-md-6">
                             <label>Название производителя</label>
                             <input class="form-control" v-model="name" required>
-                            <label>Адресс производителя</label>
-                            <input class="form-control" v-model="address" required>
+                            <label>Страна производителя</label>
+                            <input class="form-control" v-model="country" required>
+                            <label>Город производителя</label>
+                            <input class="form-control" v-model="city" required>
+                            <label>Улица производителя</label>
+                            <input class="form-control" v-model="street" required>
+                            <label>Номер здания производителя</label>
+                            <input class="form-control" v-model="house_number" required>
+                            <label>Почтовый индекс производителя</label>
+                            <input class="form-control" v-model="postcode" required>
                         </div>
                         <div class="col-md-6">
                             <label>Описание производителя</label>
@@ -36,8 +44,12 @@ export default {
     data(){
         return {
             name: null,
-            address: null,
             description: null,
+            country: null,
+            city: null,
+            street: null,
+            house_number: null,
+            postcode: null,
         }
     },
     methods: {
@@ -53,14 +65,22 @@ export default {
 
             const manufacture = {
                 name: this.name,
-                address: this.address,
-                description: this.description
+                description: this.description,
+                country: this.country,
+                city: this.city,
+                street: this.street,
+                house_number: this.house_number,
+                postcode: this.postcode,
             }
 
             this.addManufacture(manufacture).then((resp) => {
                 this.name = null;
-                this.address = null;
                 this.description = null;
+                this.country = null;
+                this.city = null;
+                this.street = null;
+                this.house_number = null;
+                this.postcode = null;
 
                 this.closeShow();
                 this.fetchManufacturers();

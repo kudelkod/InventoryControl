@@ -37,7 +37,7 @@
                             <label>Название параметра</label>
                             <input class="form-control" type="text" v-model="parameter.name" required>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label>Тип параметра</label>
                             <select class="form-select" v-model="parameter.type_id" required>
                                 <option v-for="type in getTypes" :value="type.id">
@@ -49,6 +49,7 @@
                             <label>Значение параметра</label>
                             <input
                                 class="form-check"
+                                style="margin-top: 6px"
                                 v-if="parameter.type_id === parameterIdTypes.bool"
                                 type="checkbox"
                                 true-value="1"
@@ -71,7 +72,9 @@
                                 required
                             />
                             <h6 v-else>Выберите тип параметра</h6>
-                            <span style="font-size: 26px" @click="removeParameter(index)">-</span>
+                        </div>
+                        <div class="col-md-1" style="margin-top: 17px">
+                            <span style="font-size: 26px; cursor: pointer" @click="removeParameter(index)">&ndash;</span>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -119,7 +122,7 @@ export default {
             'fetchTypes': 'modelsModule/fetchParametersTypes',
             'fetchModels': 'modelsModule/fetchModels',
             'fetchModelParameters': 'modelsModule/fetchModelParameters',
-            'editModel': 'modelsModule/addModel',
+            'editModel': 'modelsModule/editModel',
         }),
         ...mapMutations({
             'setModelParameters': 'modelsModule/setModelParameters'

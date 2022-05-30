@@ -4,7 +4,7 @@ use App\Modules\Model\src\Controllers\ModelController;
 use App\Modules\Model\src\Controllers\ParameterController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [ModelController::class, 'index']);
+Route::get('/', [ModelController::class, 'index'])->name('index');
 Route::get('/getModels', [ModelController::class, 'getModels']);
 Route::get('{id}/getModelParameters', [ModelController::class, 'getModelParameters']);
 Route::get('/getTypes', [ParameterController::class, 'getTypes']);
