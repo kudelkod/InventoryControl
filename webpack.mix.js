@@ -15,5 +15,6 @@ mix.js('resources/js/app.js', 'public/js')
     .js('app/Modules/Categories/resources/js/categories.js', 'public/js/categories')
     .js('app/Modules/Manufacture/resources/js/manufacturers.js', 'public/js/manufacturers')
     .js('app/Modules/Model/resources/js/models.js', 'public/js/models')
+    .js('app/Modules/Inventory/resources/js/inventory.js', 'public/js/inventory')
     .vue()
     .sass('resources/sass/app.scss', 'public/css');

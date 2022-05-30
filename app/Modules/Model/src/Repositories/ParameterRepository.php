@@ -70,15 +70,12 @@ class ParameterRepository extends BaseRepository implements ParameterRepositoryI
 
     public function editModelParameters($parameters, $modelId)
     {
+        $this->deleteModelParameters($modelId);
+
         foreach ($parameters as $parameter){
             try{
-                if (isset($parameter['id'])){
-                    $oldParameter = $this->model->find($parameter['id']);
-                    $oldParameter->update($parameter);
-                }
-                else{
-                    $this->model->create($parameter);
-                }
+                unset($parameter['id']);
+                $this->model->create($parameter);
             }
             catch (\Exception $e){
                 return false;

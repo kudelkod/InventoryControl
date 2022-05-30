@@ -3,5 +3,6 @@
     "/js/categories/categories.js": "/js/categories/categories.js",
     "/js/manufacturers/manufacturers.js": "/js/manufacturers/manufacturers.js",
     "/js/models/models.js": "/js/models/models.js",
+    "/js/inventory/inventory.js": "/js/inventory/inventory.js",
     "/css/app.css": "/css/app.css"
 }

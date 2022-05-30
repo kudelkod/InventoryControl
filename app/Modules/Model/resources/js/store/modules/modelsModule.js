@@ -54,7 +54,7 @@ export default {
         },
         addModel({commit}, model){
             return new Promise((resolve, reject) => {
-                axios.post('/models/'+model.id+'/editModel',{
+                axios.post('/models/addModel',{
                     name: model.name,
                     manufacture_id: model.manufacturer.id,
                     year: model.date,

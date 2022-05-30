@@ -179,6 +179,7 @@ return [
         \App\Modules\Categories\src\CategoryServiceProvider::class,
         \App\Modules\Manufacture\src\ManufactureServiceProvider::class,
         \App\Modules\Model\src\ModelServiceProvider::class,
+        \App\Modules\Inventory\src\InventoryServiceProvider::class,
 
     ],
 
