@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CategoryTableSeeder extends Seeder
+class RolesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,11 +14,15 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        $rootCategory = [
-            'parent_category_id' => 0,
-            'name' => 'Без категории',
+        $data =[
+            [
+                'role' => 'admin',
+            ],
+            [
+                'role' => 'user'
+            ],
         ];
 
-        \DB::table('categories')->insert($rootCategory);
+        \DB::table('roles')->insert($data);
     }
 }

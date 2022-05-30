@@ -27,7 +27,6 @@ export default {
                 axios.post('/categories/addCategory',{
                     name: category.name,
                     parent_category_id: category.parent_category_id,
-                    slug: category.slug,
                     description: category.description,
                 })
                     .then((response) =>
@@ -59,7 +58,6 @@ export default {
                 axios.post('/categories/'+category.id+'/editCategory',{
                     name: category.name,
                     parent_category_id: category.parent_category_id,
-                    slug: category.slug,
                     description: category.description,
                 })
                     .then((response) =>

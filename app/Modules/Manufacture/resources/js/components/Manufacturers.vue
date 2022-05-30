@@ -16,7 +16,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Производитель</th>
-                                <th>Адрес</th>
+                                <th>Страна</th>
                                 <th class="d-grid gap-2 d-md-flex justify-content-md-end me-3 pe-5">Управление</th>
                             </tr>
                             </thead>
@@ -24,7 +24,7 @@
                             <tr v-for="manufacture in getManufacturers">
                                 <td>{{ manufacture.id }}</td>
                                 <td>{{ manufacture.name }}</td>
-                                <td>{{ manufacture.address }}</td>
+                                <td>{{ manufacture.country }}</td>
                                 <td class="d-grid gap-2 d-md-flex justify-content-md-end">
                                     <a class="btn btn-primary" @click="showEditPopup(manufacture)">Редактировать</a>
                                     <a class="btn btn-danger" @click="showDeletePopup(manufacture)">Удалить</a>

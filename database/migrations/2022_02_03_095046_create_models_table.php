@@ -18,7 +18,6 @@ class CreateModelsTable extends Migration
 
             $table->string('name');
             $table->text('description')->nullable();
-            $table->text('description_html')->nullable();
             $table->timestamp('year')->nullable();
 
             $table->unsignedBigInteger('manufacture_id')->unsigned();

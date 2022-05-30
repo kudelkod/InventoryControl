@@ -31,7 +31,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
      */
     public function getAllCategories(): mixed
     {
-        $columns = ['id', 'parent_category_id', 'name', 'slug', 'description'];
+        $columns = ['id', 'parent_category_id', 'name', 'description'];
         return $this->model->select($columns)
                            ->with(['parentCategory:id,name']);
     }
