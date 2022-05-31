@@ -1,17 +1,17 @@
 export default {
     namespaced: true,
     state:{
-        manufacturers: Array
+        manufacturers: Array,
     },
     getters:{
         getManufacturers(state){
             return state.manufacturers;
-        }
+        },
     },
     mutations:{
         setManufacturers(state, data){
             state.manufacturers = data;
-        }
+        },
     },
     actions:{
         fetchManufacturers({commit}){

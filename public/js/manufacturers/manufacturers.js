@@ -11019,7 +11019,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.add{\n    max-width: 935px;\n}\n.modal-footer {\n    justify-content: end;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.add{\r\n    max-width: 935px;\n}\n.modal-footer {\r\n    justify-content: end;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11067,7 +11067,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.edit[data-v-54f15f95]{\n    max-width: 935px;\n}\n.modal-footer[data-v-54f15f95] {\n    justify-content: end;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.edit[data-v-54f15f95]{\r\n    max-width: 935px;\n}\n.modal-footer[data-v-54f15f95] {\r\n    justify-content: end;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

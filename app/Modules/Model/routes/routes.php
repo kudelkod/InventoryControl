@@ -11,3 +11,4 @@ Route::get('/getTypes', [ParameterController::class, 'getTypes']);
 Route::post('/addModel', [ModelController::class, 'addModel']);
 Route::delete('/{id}/deleteModel', [ModelController::class, 'deleteModel']);
 Route::post('{id}/editModel', [ModelController::class, 'editModel']);
+Route::get('/{manufacture_id}/getManufacturersModels', [ModelController::class, 'getManufacturersModels']);

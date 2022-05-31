@@ -4,6 +4,7 @@ namespace App\Modules\Model\src\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Manufacture\src\Services\Contracts\ManufactureServiceInterface;
+use App\Modules\Model\src\Models\Model;
 use App\Modules\Model\src\Services\Contracts\ModelServiceInterface;
 use Illuminate\Http\Request;
 
@@ -41,5 +42,9 @@ class ModelController extends Controller
 
     public function getModelParameters($id){
         return $this->modelsService->getModelParameters($id);
+    }
+
+    public function getManufacturersModels($manufacture_id){
+        return Model::select('*')->where('manufacture_id', $manufacture_id)->get()->toArray();
     }
 }

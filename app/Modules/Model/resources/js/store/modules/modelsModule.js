@@ -4,6 +4,7 @@ export default {
         models: Array,
         types: Array,
         modelParameters: Array,
+        manufacturersModels: Array,
     },
     getters:{
         getModels(state){
@@ -14,6 +15,9 @@ export default {
         },
         getModelParameters(state){
             return state.modelParameters
+        },
+        getManufacturersModels(state){
+            return state.manufacturersModels;
         }
     },
     mutations:{
@@ -25,6 +29,9 @@ export default {
         },
         setModelParameters(state, parameters){
             state.modelParameters = parameters;
+        },
+        setManufacturersModels(state, data){
+            state.manufacturersModels = data;
         }
     },
     actions:{
@@ -50,6 +57,14 @@ export default {
             })
                 .then((response)=>{
                     commit('setModelParameters', response.data);
+                })
+        },
+        fetchManufacturersModels({commit}, manufacture){
+            return axios.get('/models/'+manufacture.id+'/getManufacturersModels', {
+
+            })
+                .then((response)=> {
+                    commit('setManufacturersModels', response.data);
                 })
         },
         addModel({commit}, model){
